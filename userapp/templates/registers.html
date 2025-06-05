@@ -2,202 +2,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Register | BlogBeat</title>
-    <style>
-    /* Base Reset */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | BlogBeat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
     body {
-        overflow: hidden;
-        background: linear-gradient(120deg, #1CB5E0, #000851);
-        position: relative;
-        min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #1cb5e0 0%, #000851 100%);
     }
-
-    /* Abstract Background Shapes */
-    body::before, body::after {
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
-        z-index: 0;
-    }
-
-    body::before {
-        width: 600px;
-        height: 600px;
-        top: -150px;
-        left: -150px;
-    }
-
-    body::after {
-        width: 400px;
-        height: 400px;
-        bottom: -100px;
-        right: -100px;
-    }
-
-    .register-container {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .register-box {
-        display: flex;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2.5rem;
-        border-radius: 16px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        width: 850px;
-        backdrop-filter: blur(10px);
-        transition: 0.3s ease;
-    }
-
-    .register-box:hover {
-        transform: scale(1.02);
-    }
-
-    .register-form {
-        flex: 1;
-        padding-right: 40px;
-    }
-
-    .register-form h2 {
-        font-size: 30px;
-        color: #111;
-        margin-bottom: 1.5rem;
-    }
-
-    .register-form label {
-        font-weight: 600;
-        font-size: 15px;
-        color: #333;
-        display: block;
-        margin-top: 14px;
-    }
-
-    .register-form input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 16px;
-        margin-top: 4px;
-        transition: 0.3s;
-    }
-
-    .register-form input:focus {
-        border-color: #1CB5E0;
-        box-shadow: 0 0 10px rgba(28, 181, 224, 0.3);
-        outline: none;
-    }
-
-    .register-btn {
-        width: 100%;
-        padding: 14px;
-        margin-top: 24px;
-        border: none;
-        background: linear-gradient(135deg, #00C9FF, #92FE9D);
-        color: #fff;
-        font-size: 18px;
-        font-weight: bold;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .register-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 7px 20px rgba(0, 201, 255, 0.4);
-    }
-
-    .already-member {
-        text-align: center;
-        margin-top: 15px;
-        font-size: 15px;
-    }
-
-    .already-member a {
-        color: #007aff;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    .already-member a:hover {
-        text-decoration: underline;
-    }
-
-    .register-illustration {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .register-illustration img {
-        width: 100%;
-        max-width: 300px;
-        animation: slideIn 1s ease;
-    }
-
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-        .register-box {
-            flex-direction: column;
-            width: 90%;
-        }
-
-        .register-form {
-            padding-right: 0;
-        }
-
-        .register-illustration img {
-            display: none;
-        }
-    }
-    </style>
+  </style>
 </head>
-<body>
-    <div class="register-container">
-        <div class="register-box">
-            <div class="register-form">
-                <h2>Create Your BlogBeat Account</h2>
-                <form method="POST">
-                    {% csrf_token %}
-                    <label for="firstname">First Name:</label>
-                    <input type="text" id="firstname" name="firstname" required>
+<body class="flex items-center justify-center min-h-screen px-4">
+  <div class="w-full max-w-4xl bg-white shadow-2xl rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+    
+    <!-- Illustration Side -->
+    <div class="relative hidden lg:flex items-center justify-center bg-gradient-to-tr from-purple-600 to-indigo-700 p-10">
+<!-- Logo Section -->
+<!-- BlogBeat Logo in a Modern Circle -->
+<div class="absolute top-6 left-6 flex items-center space-x-2">
+  <div class="w-12 h-12 bg-white rounded-full overflow-hidden shadow-lg border-2 border-indigo-500">
+    <img src="{% static 'img/blogb.jpg' %}" alt="BlogBeat Logo" class="w-full h-full object-contain p-1">
+  </div>
+  <h1 class="text-white text-xl font-semibold tracking-wide">BlogBeat</h1>
+</div>
 
-                    <label for="lastname">Last Name:</label>
-                    <input type="text" id="lastname" name="lastname" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-
-                    <button type="submit" class="register-btn">Register</button>
-                </form>
-                <p class="already-member">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
-            </div>
-            <div class="register-illustration">
-                <img src="https://static.vecteezy.com/system/resources/previews/005/879/539/original/cloud-computing-modern-flat-concept-for-web-banner-design-man-enters-password-and-login-to-access-cloud-storage-for-uploading-and-processing-files-illustration-with-isolated-people-scene-free-vector.jpg" alt="Sign Up Illustration">
-            </div>
-        </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Creative Illustration" class="w-72 z-10 animate-float-slow">
     </div>
+
+    <!-- Mobile Logo -->
+<div class="lg:hidden flex justify-center items-center mt-6 mb-4">
+  <div class="w-12 h-12 bg-white rounded-full overflow-hidden shadow-md border-2 border-indigo-500">
+    <img src="{% static 'img/blogb.jpg' %}" alt="BlogBeat Logo" class="w-full h-full object-contain p-1">
+  </div>
+  <h1 class="ml-3 text-indigo-800 text-xl font-semibold tracking-wide">BlogBeat</h1>
+</div>
+
+    <!-- Form Side -->
+    <div class="p-10">
+      <h2 class="text-3xl font-bold text-indigo-800 mb-2">Create your BlogBeat Account</h2>
+      <p class="text-sm text-gray-500 mb-6">Join the creators' hub and start sharing your voice today.</p>
+
+      <form method="POST" class="space-y-5">
+        {% csrf_token %}
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm text-gray-700 font-medium">First Name</label>
+            <input type="text" name="firstname" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400">
+          </div>
+          <div>
+            <label class="text-sm text-gray-700 font-medium">Last Name</label>
+            <input type="text" name="lastname" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-700 font-medium">Email Address</label>
+          <input type="email" name="email" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400">
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-700 font-medium">Password</label>
+          <input type="password" name="password" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400">
+        </div>
+
+        <button type="submit" class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition-all duration-300 shadow-md">
+          🚀 Register Now
+        </button>
+      </form>
+
+      <p class="text-sm text-center text-gray-600 mt-6">
+        Already have an account? <a href="{% url 'login' %}" class="text-indigo-600 font-medium hover:underline">Log in</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Floating Animation Keyframe -->
+  <style>
+    @keyframes float-slow {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .animate-float-slow {
+      animation: float-slow 6s ease-in-out infinite;
+    }
+  </style>
 </body>
 </html>
