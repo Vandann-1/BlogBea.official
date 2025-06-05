@@ -11,33 +11,32 @@
         theme: {
           extend: {
             colors: {
-              primary: "#4f46e5", // Indigo-600
-              accent: "#8b5cf6", // Violet-500
-              dark: "#1e1b4b", // Dark Indigo
+              primary: "#2563eb", // Blue-600
+              accent: "#60a5fa", // Blue-400
+              dark: "#1e40af", // Dark Blue
             },
           },
         },
       };
     </script>
   </head>
+
   <body class="bg-white text-gray-800">
     <!-- HEADER -->
-    <header
-      class="bg-dark text-white shadow-md fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center"
-    >
+    <header class="bg-gradient-to-r from-blue-700 to-blue-500 text-white shadow-md fixed top-0 left-0 right-0 z-50 px-6 py-3 flex justify-between items-center">
+      <!-- Logo -->
       <a href="#" class="text-2xl font-bold tracking-wide hover:text-accent transition-all">BlogBeat</a>
 
-      <div class="md:hidden block text-3xl" onclick="toggleMenu()">☰</div>
+      <!-- Mobile Menu Icon -->
+      <div class="md:hidden block text-3xl cursor-pointer" onclick="toggleMenu()">☰</div>
 
-      <nav
-        id="navbar"
-        class="hidden md:flex space-x-6 items-center font-medium text-sm"
-      >
-        <!-- {% if user.is_authenticated %}
-        <a href="/add-blog" class="hover:text-accent">Add Blog</a>
-        <a href="/" class="hover:text-accent">All Blogs</a> -->
+      <!-- Navigation -->
+      <nav id="navbar" class="hidden md:flex space-x-6 items-center font-medium text-sm">
+        {% if user.is_authenticated %}
+        <a href="/add-blog" class="hover:text-accent transition-all">Add Blogs</a>
+        <a href="/" class="hover:text-accent transition-all">All Blogs</a>
 
-        <!-- Profile Dropdown -->
+        <!-- Profile with Dropdown -->
         <div class="relative group">
           <img
             src="{% static 'img/th.jpg' %}"
@@ -66,8 +65,6 @@
       </nav>
     </header>
 
-
-
     <!-- Mobile Nav Toggle Script -->
     <script>
       function toggleMenu() {
@@ -78,12 +75,14 @@
         nav.classList.toggle("absolute");
         nav.classList.toggle("right-6");
         nav.classList.toggle("top-20");
-        nav.classList.toggle("bg-dark");
+        nav.classList.toggle("bg-gradient-to-r");
+        nav.classList.toggle("from-blue-700");
+        nav.classList.toggle("to-blue-500");
         nav.classList.toggle("rounded-lg");
         nav.classList.toggle("p-4");
         nav.classList.toggle("space-y-4");
+        nav.classList.toggle("z-50");
       }
     </script>
-    
   </body>
 </html>

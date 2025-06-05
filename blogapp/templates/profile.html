@@ -1,209 +1,63 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | BlogBeat</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #f8f9fa;
-            --secondary: #0072ff;
-            --accent: #53b5fb;
-            --text-light: #080808;
-            --text-dark: white;
-            --transition: all 0.3s ease-in-out;
-        }
-
-        .dark-mode {
-            --primary: #1a1a1a;
-            --secondary: #0051cc;
-            --accent: #3399ff;
-            --text-light: white;
-            --text-dark: black;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: var(--primary);
-            color: var(--text-dark);
-            transition: background 0.5s ease-in-out;
-            display: flex;
-            height: 100vh;
-        }
-
-        .sidebar {
-            width: 250px;
-            background: white;
-            padding: 20px;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark-mode .sidebar {
-            background: #222;
-        }
-
-        .sidebar h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-        }
-
-        .sidebar ul li {
-            margin: 15px 0;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .sidebar ul li a:hover {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .profile-container {
-            flex-grow: 1;
-            padding: 30px;
-            background: white;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .dark-mode .profile-container {
-            background: #333;
-            color: white;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .profile-picture {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid var(--text-light);
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .profile-picture:hover {
-            transform: scale(1.1);
-        }
-
-        .profile-info h2 {
-            font-size: 22px;
-            margin-bottom: 5px;
-            color: var(--text-light);
-        }
-
-        .profile-info p {
-            font-size: 14px;
-            color: #777;
-        }
-
-        .profile-actions a, .profile-actions button {
-            display: inline-block;
-            margin: 0.5rem;
-            padding: 10px 20px;
-            background: var(--text-light);
-            color: var(--text-dark);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .profile-actions a:hover, .profile-actions button:hover {
-            background: #ff4569;
-        }
-
-        .profile-details {
-            text-align: left;
-            margin-top: 1.5rem;
-            padding: 15px;
-            background: var(--accent);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile | BlogBeat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="sidebar">
-        <h2>BlogBeat</h2>
-        <ul>
-            <li><a href="profile"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="settings"><i class="fas fa-cog"></i> Settings</a></li>
-            <li><a href="lg"><i class="fas fa-credit-card"></i> Language</a></li>
-            <li><a href="#"><i class="fas fa-database"></i> Database</a></li>
-            <li><a href="logout"><i class="fas fa-sign-out"></i> logout</a></li>
-        </ul>
-    </div>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex">
 
-    <div class="profile-container">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white shadow-md p-6 hidden md:block">
+    <h2 class="text-2xl font-bold text-blue-600 mb-6">BlogBeat</h2>
+    <ul class="space-y-4">
+      <li><a href="profile" class="flex items-center gap-3 text-lg hover:text-blue-600"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="settings" class="flex items-center gap-3 text-lg hover:text-blue-600"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="lg" class="flex items-center gap-3 text-lg hover:text-blue-600"><i class="fas fa-language"></i> Language</a></li>
+      <li><a href="#" class="flex items-center gap-3 text-lg hover:text-blue-600"><i class="fas fa-database"></i> Database</a></li>
+      <li><a href="logout" class="flex items-center gap-3 text-lg hover:text-red-600"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Profile Content -->
+  <main class="flex-grow p-6 flex flex-col items-center justify-center">
+    <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg p-8 text-center">
+      <div class="mb-6">
         {% if user.profile_picture %}
-            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+          <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="w-32 h-32 mx-auto rounded-full border-4 border-blue-500 object-cover shadow hover:scale-105 transition-transform duration-300">
         {% else %}
-            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="profile-picture">
+          <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="w-32 h-32 mx-auto rounded-full border-4 border-blue-500 object-cover shadow hover:scale-105 transition-transform duration-300">
         {% endif %}
-        
-        <form action="/update-profile-pic" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="profile_picture" accept="image/*">
-            <button type="submit">Update Picture</button>
+
+        <form action="/update-profile-pic" method="post" enctype="multipart/form-data" class="mt-4 space-y-2">
+          {% csrf_token %}
+          <input type="file" name="profile_picture" accept="image/*" class="block mx-auto text-sm">
+          <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Update Picture</button>
         </form>
+      </div>
 
-        <div class="profile-info">
-            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-            <p>{{ user.email }}</p>
-        </div>
+      <div class="mb-4">
+        <h2 class="text-2xl font-semibold">{{ user.first_name }} {{ user.last_name }}</h2>
+        <p class="text-gray-500">{{ user.email }}</p>
+      </div>
 
-        <div class="profile-actions">
-            <a href="editprofile">Edit Profile</a>
-            <a href="/accounts/logout">Logout</a>
-        </div>
+      <div class="flex justify-center gap-4 mb-6">
+        <a href="editprofile" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Edit Profile</a>
+        <a href="/accounts/logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Logout</a>
+      </div>
 
-        <div class="profile-details">
-            <h4>Additional Information</h4>
-            <p>Full Name: {{ user.first_name }} {{ user.last_name }}</p>
-            <p>Joined: {{ user.date_joined }}</p>
-            <p>Last Login: {{ user.last_login }}</p>
-        </div>
+      <div class="text-left bg-blue-100 p-5 rounded-lg shadow-inner">
+        <h4 class="text-xl font-semibold mb-2 text-blue-800">Additional Information</h4>
+        <p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><strong>Joined:</strong> {{ user.date_joined }}</p>
+        <p><strong>Last Login:</strong> {{ user.last_login }}</p>
+      </div>
     </div>
+  </main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (localStorage.getItem("darkMode") === "disable") {
-                document.body.classList.add("");
-            }
-        });
-    </script>
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
