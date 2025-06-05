@@ -1,141 +1,88 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Blog</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-
-        /* Body Styling */
-        body {
-            background: #f4f4f4; /* Light background for contrast */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh; /* Full height */
-            padding: 20px;
-        }
-
-        /* Information Section */
-        .info-section {
-            background: #6c5ce7; /* Updated background color */
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 600px; /* Max width for larger screens */
-        }
-
-        /* Centering the form */
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            width: 100%;
-            max-width: 600px; /* Max width for larger screens */
-        }
-
-        /* Form Styling */
-        .form-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            text-align: center;
-        }
-
-        .form-box h2 {
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .form-box label {
-            display: block;
-            text-align: left;
-            margin: 0.5rem 0 0.2rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-box input,
-        .form-box textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            font-size: 1rem;
-        }
-
-        .form-box textarea {
-            resize: none;
-        }
-
-        .form-box button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background: #0066ff;
-            color: white;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .form-box button:hover {
-            background: #004bcc;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .form-box {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Blog | BlogBeat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-purple-50 via-white to-purple-100 min-h-screen py-10 px-4">
 
-    <div class="info-section">
-        <h2>Welcome to BlogBeat!</h2>
-        <p>BlogBeat is a platform where you can share your thoughts, ideas, and stories with the world. Join our community of passionate writers and readers!</p>
-        <p>Start creating your blog today and connect with like-minded individuals!</p>
-    </div>
+  <!-- Info Section -->
+  <section class="max-w-4xl mx-auto bg-gradient-to-tr from-indigo-700 to-purple-600 text-white rounded-3xl shadow-xl p-8 mb-10 text-center">
+    <h2 class="text-4xl font-bold mb-4">Welcome to BlogBeat ✨</h2>
+    <p class="text-lg">Where words turn into wonders.</p>
+    <p class="text-sm mt-2">Craft your unique story, powered by AI. Share knowledge, insights, and creativity.</p>
+  </section>
 
-    <div class="form-container">
-        <div class="form-box">
-            <h2>Create Blog</h2>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" maxlength="50" required>
+  <!-- Form Section -->
+  <section class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-10 space-y-8">
+    <h2 class="text-3xl font-semibold text-gray-800 text-center">📝 Create a New Blog</h2>
 
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" maxlength="200" required rows="5"></textarea>
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+      {% csrf_token %}
 
-                <label for="blog_image">Blog Image:</label>
-                <input type="file" id="blog_image" name="blog_image" accept="image/*">
+      <!-- Title with AI -->
+      <div>
+        <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Blog Title</label>
+        <input type="text" id="title" name="title" maxlength="50" required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm" />
+        <button type="button"
+          onclick="generateTitle()"
+          class="mt-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-md text-sm transition duration-200">
+          🤖 Generate Title with AI
+        </button>
+      </div>
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
+      <!-- Description with AI -->
+      <div>
+        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Blog Description</label>
+        <textarea id="description" name="description" maxlength="200" required rows="5"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm resize-none"></textarea>
+        <button type="button"
+          onclick="generateDescription()"
+          class="mt-2 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-md text-sm transition duration-200">
+          ✍️ Generate Description with AI
+        </button>
+      </div>
 
+      <!-- Image Upload -->
+      <div>
+        <label for="blog_image" class="block text-sm font-medium text-gray-700 mb-2">Upload Blog Image</label>
+        <input type="file" id="blog_image" name="blog_image" accept="image/*"
+          class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200" />
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
+          🚀 Publish Blog
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- JavaScript to Call Django AI APIs -->
+  <script>
+    async function generateTitle() {
+      const res = await fetch('/generate-title/');
+      const data = await res.json();
+      document.getElementById('title').value = data.title;
+    }
+
+    async function generateDescription() {
+      const res = await fetch('/generate-description/');
+      const data = await res.json();
+      document.getElementById('description').value = data.description;
+    }
+  </script>
 </body>
 </html>
