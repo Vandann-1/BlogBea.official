@@ -1,0 +1,78 @@
+<footer class="bg-gray-900 text-gray-300 py-12 mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-sm">
+      
+      <!-- Logo and Description -->
+      <div class="col-span-2 lg:col-span-1">
+        <h3 class="text-white text-lg font-bold mb-2">BlogBeat</h3>
+        <p class="text-gray-400 text-sm">Where ideas become stories. Share, save, and connect with creators globally.</p>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-white font-semibold mb-2">Explore</h4>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:underline">All Blogs</a></li>
+          <li><a href="#" class="hover:underline">Trending</a></li>
+          <li><a href="#" class="hover:underline">Create Blog</a></li>
+          <li><a href="#" class="hover:underline">Saved Posts</a></li>
+        </ul>
+      </div>
+
+      <!-- Account -->
+      <div>
+        <h4 class="text-white font-semibold mb-2">Account</h4>
+        <ul class="space-y-1">
+          <li><a href="{% url 'login' %}" class="hover:underline">Login</a></li>
+          <li><a href="{% url 'register' %}" class="hover:underline">Register</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-white font-semibold mb-2">Resources</h4>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:underline">FAQs</a></li>
+          <li><a href="#" class="hover:underline">Support</a></li>
+          <li><a href="#" class="hover:underline">Contact Us</a></li>
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div>
+        <h4 class="text-white font-semibold mb-2">Connect</h4>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:underline">GitHub</a></li>
+          <li><a href="#" class="hover:underline">LinkedIn</a></li>
+          <li><a href="#" class="hover:underline">Instagram</a></li>
+        </ul>
+        <div class="mt-2">
+          <span class="bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full">Status: 100% uptime</span>
+        </div>
+      </div>
+
+      <!-- Mobile App -->
+      <div>
+        <h4 class="text-white font-semibold mb-2">Mobile App</h4>
+        <p class="text-gray-400 mb-2 text-sm">Get the BlogBeat app</p>
+        <div class="flex flex-col space-y-2">
+          <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png"
+              alt="Google Play" class="w-32">
+          </a>
+          <a href="#">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+              alt="App Store" class="w-32">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Note -->
+    <div class="border-t border-gray-700 mt-10 pt-6 text-center text-xs text-gray-500">
+      © 2025 BlogBeat. Built with ❤️ for creators and readers. <br />
+      Made by <span class="text-white font-medium">TechSpire 🚀</span>
+    </div>
+  </div>
+</footer>

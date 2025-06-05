@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings | BlogBeat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --sidebar-bg: white;
+      --text: #000;
+      --card-bg: white;
+      --card-inner: #f1f3f5;
+    }
+
+    body.dark-mode {
+      --bg: #1e1e1e;
+      --sidebar-bg: #2b2b2b;
+      --text: #fff;
+      --card-bg: #333;
+      --card-inner: #444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: var(--sidebar-bg);
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      background: #0072ff;
+      color: white;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 30px;
+      background: var(--card-bg);
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .settings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .settings-group {
+      background: var(--card-inner);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .settings-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 20px;
+      background: #ccc;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .toggle::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    input:checked + .toggle {
+      background: #0072ff;
+    }
+
+    input:checked + .toggle::before {
+      transform: translateX(20px);
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>BlogBeat</h2>
+    <ul>
+      <li><a href="profile"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="settings"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="lg"><i class="fas fa-language"></i> Language</a></li>
+      <li><a href="#"><i class="fas fa-database"></i> Database</a></li>
+      <li><a href="logout"><i class="fas fa-sign-out"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="settings-header">
+      <h2>Settings</h2>
+    </div>
+
+    <div class="settings-group">
+      <label>
+        Enable Notifications
+        <input type="checkbox" />
+        <span class="toggle"></span>
+      </label>
+    </div>
+
+    <div class="settings-group">
+      <label>
+        Dark Mode
+        <input type="checkbox" class="dark-toggle" />
+        <span class="toggle"></span>
+      </label>
+    </div>
+
+    <div class="settings-group">
+      <label>
+        Auto Delete Items
+        <input type="checkbox" />
+        <span class="toggle"></span>
+      </label>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.querySelector('.dark-toggle');
+    const body = document.body;
+
+    // Load preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('dark-mode');
+      toggle.checked = true;
+    }
+
+    toggle.addEventListener('change', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
+  </script>
+</body>
+</html>

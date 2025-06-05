@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blogs - BlogBeat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: white;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #02457A;
+        }
+
+        .blog-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .blog-card {
+            width: 300px;
+            background: rgba(47, 144, 247, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            color: white;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .blog-title {
+            font-size: 20px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .blog-description {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .action-buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .delete-btn { background: #d9534f; }
+        .edit-btn { background: #f0ad4e; }
+        .repeat-btn { background: #5bc0de; }
+
+        .delete-btn:hover { background: #c9302c; }
+        .edit-btn:hover { background: #ec971f; }
+        .repeat-btn:hover { background: #31b0d5; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>My Blogs</h1>
+        <div class="blog-list">
+            {% for blog in blogs %}
+            <div class="blog-card">
+                <img src="{{ blog.blog_image.url }}" alt="Blog Image" class="blog-image">
+                <div class="blog-title">{{ blog.title }}</div>
+                <div class="blog-description">{{ blog.description }}</div>
+                <div class="action-buttons">
+                    <a href="{% url 'delete_blog' bg_id=blog.id %}" class="delete-btn">Delete</a>
+                    <a href="{% url 'edit_blog' bg_id=blog.id %}" class="edit-btn">Edit</a>
+                    <a href="{% url 're' blog_id=blog.id %}" class="repeat-btn">Repeat</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

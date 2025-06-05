@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlogBeat - Welcome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4f46e5", // Indigo-600
+              accent: "#8b5cf6", // Violet-500
+              dark: "#1e1b4b", // Dark Indigo
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-white text-gray-800">
+    <!-- HEADER -->
+    <header
+      class="bg-dark text-white shadow-md fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center"
+    >
+      <a href="#" class="text-2xl font-bold tracking-wide hover:text-accent transition-all">BlogBeat</a>
+
+      <div class="md:hidden block text-3xl" onclick="toggleMenu()">☰</div>
+
+      <nav
+        id="navbar"
+        class="hidden md:flex space-x-6 items-center font-medium text-sm"
+      >
+        <!-- {% if user.is_authenticated %}
+        <a href="/add-blog" class="hover:text-accent">Add Blog</a>
+        <a href="/" class="hover:text-accent">All Blogs</a> -->
+
+        <!-- Profile Dropdown -->
+        <div class="relative group">
+          <img
+            src="{% static 'img/th.jpg' %}"
+            alt="Profile"
+            class="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
+          />
+          <div
+            class="absolute right-0 mt-2 w-52 bg-white text-black rounded-lg shadow-lg p-2 hidden group-hover:flex flex-col z-50"
+          >
+            <div class="px-3 py-2">
+              <p class="font-semibold">{{ user.username }}</p>
+              <p class="text-xs">{{ user.email }}</p>
+            </div>
+            <hr />
+            <a href="/my-blog" class="px-3 py-2 hover:bg-gray-100 rounded">My Blog</a>
+            <a href="/settings" class="px-3 py-2 hover:bg-gray-100 rounded">Settings</a>
+            <a href="/saved-blogs" class="px-3 py-2 hover:bg-gray-100 rounded">Saved Blogs</a>
+            <a href="/logout" class="px-3 py-2 text-red-600 hover:bg-gray-100 rounded">Logout</a>
+          </div>
+        </div>
+
+        {% else %}
+        <a href="/" class="hover:text-accent">Signup</a>
+        <a href="{% url 'login' %}" class="hover:text-accent">Login</a>
+        {% endif %}
+      </nav>
+    </header>
+
+
+
+    <!-- Mobile Nav Toggle Script -->
+    <script>
+      function toggleMenu() {
+        const nav = document.getElementById("navbar");
+        nav.classList.toggle("hidden");
+        nav.classList.toggle("flex");
+        nav.classList.toggle("flex-col");
+        nav.classList.toggle("absolute");
+        nav.classList.toggle("right-6");
+        nav.classList.toggle("top-20");
+        nav.classList.toggle("bg-dark");
+        nav.classList.toggle("rounded-lg");
+        nav.classList.toggle("p-4");
+        nav.classList.toggle("space-y-4");
+      }
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,209 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | BlogBeat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #f8f9fa;
+            --secondary: #0072ff;
+            --accent: #53b5fb;
+            --text-light: #080808;
+            --text-dark: white;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        .dark-mode {
+            --primary: #1a1a1a;
+            --secondary: #0051cc;
+            --accent: #3399ff;
+            --text-light: white;
+            --text-dark: black;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--primary);
+            color: var(--text-dark);
+            transition: background 0.5s ease-in-out;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .sidebar {
+            background: #222;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .profile-container {
+            flex-grow: 1;
+            padding: 30px;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .dark-mode .profile-container {
+            background: #333;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--text-light);
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .profile-picture:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-info h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+
+        .profile-info p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .profile-actions a, .profile-actions button {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 10px 20px;
+            background: var(--text-light);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .profile-actions a:hover, .profile-actions button:hover {
+            background: #ff4569;
+        }
+
+        .profile-details {
+            text-align: left;
+            margin-top: 1.5rem;
+            padding: 15px;
+            background: var(--accent);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>BlogBeat</h2>
+        <ul>
+            <li><a href="profile"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="settings"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="lg"><i class="fas fa-credit-card"></i> Language</a></li>
+            <li><a href="#"><i class="fas fa-database"></i> Database</a></li>
+            <li><a href="logout"><i class="fas fa-sign-out"></i> logout</a></li>
+        </ul>
+    </div>
+
+    <div class="profile-container">
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+        {% else %}
+            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="profile-picture">
+        {% endif %}
+        
+        <form action="/update-profile-pic" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="profile_picture" accept="image/*">
+            <button type="submit">Update Picture</button>
+        </form>
+
+        <div class="profile-info">
+            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+            <p>{{ user.email }}</p>
+        </div>
+
+        <div class="profile-actions">
+            <a href="editprofile">Edit Profile</a>
+            <a href="/accounts/logout">Logout</a>
+        </div>
+
+        <div class="profile-details">
+            <h4>Additional Information</h4>
+            <p>Full Name: {{ user.first_name }} {{ user.last_name }}</p>
+            <p>Joined: {{ user.date_joined }}</p>
+            <p>Last Login: {{ user.last_login }}</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (localStorage.getItem("darkMode") === "disable") {
+                document.body.classList.add("");
+            }
+        });
+    </script>
+</body>
+</html>
