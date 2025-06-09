@@ -6,16 +6,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 
+
 <style>
-  /* ✅ BODY + BACKGROUND */
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #f8f9fb, #eef1f6);
-    color: #1a1a1a;
-  }
-</style>  
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(120deg, #f9fbfd, #e9eef5);
+  color: #1a1a1a;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+</style> 
 
   <style>
     .course-container {
@@ -163,15 +165,24 @@
 </style>
 
 <!-- Hero Section -->
+<section class="relative pt-32 pb-24 bg-gradient-to-b from-primary to-accent text-white text-center overflow-hidden">
+  <!-- Subtle glowing background element -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute top-1/2 left-1/2 w-[80vw] h-[80vw] -translate-x-1/2 -translate-y-1/2 bg-white opacity-10 blur-[120px] rounded-full"></div>
+  </div>
 
-    <section
-      class="pt-32 pb-20 bg-gradient-to-b from-primary to-accent text-center text-white"
-    >
-      <div class="max-w-3xl mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Welcome to BlogBeat</h1>
-        <p class="text-lg md:text-xl font-light">Explore the best blogs on various topics.</p>
-      </div>
-    </section>
+  <!-- Main Content -->
+  <div class="max-w-3xl mx-auto px-4">
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow mb-4">
+      Welcome to <span class="text-white">Blog<span class="text-yellow-300">Beat</span></span>
+    </h1>
+    <p class="text-lg md:text-xl font-light text-white/90">
+      Explore the best blogs on various topics.
+    </p>
+  </div>
+</section>
+
+
 
 <!-- Word Animation Style -->
 <style>
@@ -262,49 +273,55 @@
 
 
   <!-- Search Bar -->
-<div class="flex justify-center mt-5 space-x-3">
-  <input 
-    type="text" 
-    id="searchBar" 
-    placeholder="Search blogs..." 
-    onkeyup="filterBlogs()"
-    class="w-96 px-4 py-3 border-4 border-purple-600 rounded-md bg-gray-100 text-gray-900 placeholder-gray-500 text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-  />
-  <button
-    type="button"
-    onclick="filterBlogs()"
-    class="px-6 py-3 bg-purple-600 text-white text-lg rounded-md hover:bg-purple-700 active:scale-95 transition transform"
-  >
-    Search
-  </button>
+<div class="flex justify-center items-center mt-10 space-x-3 px-4">
+  <div class="relative w-full max-w-xl">
+    <input 
+      type="text" 
+      id="searchBar" 
+      placeholder="Search blogs..."
+      onkeyup="filterBlogs()"
+      class="w-full pl-5 pr-16 py-3 text-lg rounded-xl bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-300"
+    />
+    <button 
+      type="button" 
+      onclick="filterBlogs()" 
+      class="absolute top-1/2 right-2 -translate-y-1/2 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg shadow-sm transition-all duration-300"
+    >
+      Search
+    </button>
+  </div>
 </div>
+
 
 
 
 <!-- icon of ad blog.... -->
 
-<!-- Make sure you include FontAwesome for icons -->
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 />
 
-<div class="flex flex-wrap justify-center gap-6 mt-8 px-4">
-  <a href="/my-blog" class="flex items-center gap-3 bg-purple-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-purple-700 hover:shadow-xl transition transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-purple-300">
-    <i class="fas fa-book-open text-lg"></i>
-    <span class="font-semibold text-lg">My Blogs</span>
+<div class="flex flex-wrap justify-center gap-5 mt-10 px-4">
+  <!-- My Blogs -->
+  <a href="/my-blog" class="flex items-center gap-3 px-6 py-3 bg-purple-600 text-white rounded-lg text-lg font-medium shadow-md hover:bg-purple-700 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-purple-300">
+    <i class="fas fa-book-open text-xl"></i>
+    My Blogs
   </a>
 
-  <a href="/add-blog" class="flex items-center gap-3 bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 hover:shadow-xl transition transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-green-300">
-    <i class="fas fa-plus text-lg"></i>
-    <span class="font-semibold text-lg">Add Blog</span>
+  <!-- Add Blog -->
+  <a href="/add-blog" class="flex items-center gap-3 px-6 py-3 bg-green-600 text-white rounded-lg text-lg font-medium shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300">
+    <i class="fas fa-plus text-xl"></i>
+    Add Blog
   </a>
 
-  <a href="/live-chat" class="flex items-center gap-3 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-xl transition transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-blue-300">
-    <i class="fas fa-comments text-lg"></i>
-    <span class="font-semibold text-lg capitalize">Livechat</span>
+  <!-- Live Chat -->
+  <a href="/live-chat" class="flex items-center gap-3 px-6 py-3 bg-blue-600 text-white rounded-lg text-lg font-medium shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300">
+    <i class="fas fa-comments text-xl"></i>
+    Live Chat
   </a>
 </div>
+
 
 <br>
 
