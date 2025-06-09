@@ -14,5 +14,6 @@ urlpatterns = [
     path("live-chat",Livechat,name="live-chat"),
     path('friend-request/send/<int:user_id>/', send_friend_request, name='send_friend_request'),
     path('friend-request/accept/<int:request_id>/', accept_friend_request, name='accept_friend_request'),
+    path('podcasts',podcs,name="podcasts")
 
 ]

@@ -70,7 +70,8 @@ INSTALLED_APPS = [
     'blogapp',
     'django_cron',
     'corsheaders',    
-    'roomapp'  
+    'roomapp' , 
+    'podcasts'
 
 ]
 

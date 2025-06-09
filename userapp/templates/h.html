@@ -10,234 +10,6 @@
       font-family: 'Inter', sans-serif;
     }
   </style>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
-
-  .blogbeat-features {
-    font-family: 'DM Sans', sans-serif;
-    background-color: #fdf8f3;
-    color: #2e2a32;
-    text-align: center;
-    padding: 4rem 2rem;
-  }
-  
-  .blogbeat-features h2 {
-    font-size: 2.5rem;
-    color: #4e1d77;
-    margin-bottom: 0.5rem;
-  }
-  
-  .blogbeat-features .intro {
-    font-size: 1.1rem;
-    margin-bottom: 3rem;
-    color: #555;
-  }
-  
-  .features-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .feature-card {
-    background: #fff;
-    border-radius: 1.5rem;
-    padding: 2rem;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-  }
-  
-  .feature-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.1);
-  }
-  
-  .icon {
-    font-size: 2.5rem;
-    color: #7c3aed;
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background-color: #2e25b7;
-      color: white;
-    }
-
-    .hero-section {
-      padding: 60px 20px;
-    }
-
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .hero-image {
-      flex: 1 1 45%;
-      text-align: center;
-    }
-
-    .hero-image img {
-      max-width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-text {
-      flex: 1 1 45%;
-      padding: 20px;
-    }
-
-    .hero-text h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-          header .logo {
-              font-size: 1.5rem;
-          }
-
-          nav ul {
-              flex-direction: column;
-              gap: 10px;
-          }
-
-          nav ul li a {
-              font-size: 1.2rem;
-          }
-      }
-
-      @media (max-width: 480px) {
-          header {
-              padding: 10px;
-          }
-
-          nav ul {
-              gap: 5px;
-          }
-
-          nav ul li a {
-              font-size: 1rem;
-          }
-      }
-  </style>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background-color: #2e25b7;
-      color: white;
-    }
-
-    .hero-section {
-      padding: 60px 20px;
-    }
-
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .hero-image {
-      flex: 1 1 45%;
-      text-align: center;
-    }
-
-    .hero-image img {
-      max-width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-text {
-      flex: 1 1 45%;
-      padding: 20px;
-    }
-
-    .hero-text h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .hero-text p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #ffffffd9;
-    }
-
-    .highlight {
-      font-weight: bold;
-      color: #ffffff;
-    }
-
-    /* Simple list with ticks */
-    .checklist {
-      margin: 20px 0;
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .checklist li {
-      font-size: 1.05rem;
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    .checklist li::before {
-      content: "✓ ";
-      color: #00ffb2;
-      font-weight: bold;
-    }
-
-    .hero-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 28px;
-      background-color: white;
-      color: #2e25b7;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    .hero-button:hover {
-      background-color: #ffd700;
-      color: #2e25b7;
-    }
-
-    @media (max-width: 768px) {
-      .hero-container {
-        flex-direction: column;
-        gap: 30px;
-      }
-
-      .hero-text h1 {
-        font-size: 2rem;
-      }
-    }
-  </style>
-
 
 </head>
 <body class="bg-white text-gray-800">
@@ -532,44 +304,102 @@
 
 
 
+<!-- BlogBeat Feature Section - Tailwind CSS -->
 
-    <section class="blogbeat-features">
-      <h2>Why You'll Love BlogBeat</h2>
-      <p class="intro">Every feature crafted for thinkers, talkers, and storytellers.</p>
-    
-      <div class="features-container">
-        <div class="feature-card">
-          <i class="icon">🎥</i>
-          <h3>Blog Video Chat</h3>
-          <p>Live talk about your post with your audience. Connect beyond words.</p>
+<section class="relative bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-700 py-20 px-6 md:px-0 text-white overflow-hidden blogbeat-features font-sans">
+  <!-- Decorative blurred circles -->
+  <span class="pointer-events-none absolute -top-40 -left-32 w-[32rem] h-[32rem] rounded-full bg-pink-500 opacity-20 blur-3xl animate-pulse"></span>
+  <span class="pointer-events-none absolute -bottom-44 -right-36 w-[32rem] h-[32rem] rounded-full bg-cyan-500 opacity-20 blur-3xl animate-pulse [animation-delay:2s]"></span>
+
+  <div class="relative max-w-6xl mx-auto">
+    <!-- Heading -->
+    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-center drop-shadow-lg">
+      Why You'll Love <span class="text-sky-400">BlogBeat</span>
+    </h2>
+    <p class="mt-4 mb-16 text-center text-indigo-200 text-lg md:text-xl">
+      Every feature crafted for thinkers, talkers, and storytellers.
+    </p>
+
+    <!-- Feature Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <!-- Card 1 -->
+      <div class="group feature-card bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg ring-1 ring-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:ring-2 hover:ring-cyan-400 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-br from-sky-500 to-pink-500 shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
+          <span class="text-3xl">🎥</span>
         </div>
-        <div class="feature-card">
-          <i class="icon">💭</i>
-          <h3>Thought Exchange</h3>
-          <p>Swap ideas instantly with a snap-style message board.</p>
-        </div>
-        <div class="feature-card">
-          <i class="icon">📌</i>
-          <h3>Saved Posts</h3>
-          <p>Bookmark gems and re-read them anytime. Your digital library.</p>
-        </div>
-        <div class="feature-card">
-          <i class="icon">📈</i>
-          <h3>Read Analytics</h3>
-          <p>Track who’s vibing with your content and where they’re from.</p>
-        </div>
-        <div class="feature-card">
-          <i class="icon">🎨</i>
-          <h3>Personal Themes</h3>
-          <p>Pick your aesthetic. Switch moods with a tap.</p>
-        </div>
-        <div class="feature-card">
-          <i class="icon">✍️</i>
-          <h3>Co-Blogging</h3>
-          <p>Write side by side with your friends in real-time.</p>
-        </div>
+        <h3 class="text-xl font-semibold mb-2">Blog Video Chat</h3>
+        <p class="text-indigo-200 leading-relaxed">Live talk about your post with your audience. Connect beyond words.</p>
       </div>
-    </section>
+
+      <!-- Card 2 -->
+      <div class="group feature-card bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg ring-1 ring-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:ring-2 hover:ring-cyan-400 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
+          <span class="text-3xl">💭</span>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Thought Exchange</h3>
+        <p class="text-indigo-200 leading-relaxed">Swap ideas instantly with a snap‑style message board.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group feature-card bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg ring-1 ring-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:ring-2 hover:ring-cyan-400 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-br from-emerald-500 to-lime-500 shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
+          <span class="text-3xl">📌</span>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Saved Posts</h3>
+        <p class="text-indigo-200 leading-relaxed">Bookmark gems and re‑read them anytime. Your digital library.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="group feature-card bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg ring-1 ring-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:ring-2 hover:ring-cyan-400 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
+          <span class="text-3xl">📈</span>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Read Analytics</h3>
+        <p class="text-indigo-200 leading-relaxed">Track who’s vibing with your content and where they’re from.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="group feature-card bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg ring-1 ring-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:ring-2 hover:ring-cyan-400 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-br from-fuchsia-500 to-rose-500 shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
+          <span class="text-3xl">🎨</span>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Personal Themes</h3>
+        <p class="text-indigo-200 leading-relaxed">Pick your aesthetic. Switch moods with a tap.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="group feature-card bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-lg ring-1 ring-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:ring-2 hover:ring-cyan-400 hover:shadow-2xl">
+        <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
+          <span class="text-3xl">✍️</span>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Co‑Blogging</h3>
+        <p class="text-indigo-200 leading-relaxed">Write side by side with your friends in real‑time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Optional Scroll‑Reveal Animation (pure JS) -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.feature-card').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 100}ms`;
+      card.classList.add('opacity-0', 'translate-y-8');
+      observer.observe(card);
+    });
+  });
+</script>
+
 
 <section class="bg-gradient-to-br from-white via-gray-50 to-white text-gray-800 py-20 px-6 md:px-12">
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">

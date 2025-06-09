@@ -1,7 +1,8 @@
 {% extends 'custom.html' %}
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% block content %}
-<br><br>
+<br>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -162,6 +163,7 @@
 </style>
 
 <!-- Hero Section -->
+
     <section
       class="pt-32 pb-20 bg-gradient-to-b from-primary to-accent text-center text-white"
     >
@@ -535,6 +537,16 @@ function filterBlogs() {
 }
 </script> 
 
+<section class="py-20 bg-gradient-to-br from-indigo-800 to-indigo-900 text-white text-center">
+  <h2 class="text-4xl font-extrabold mb-6">🔥 What's Hot Now</h2>
+  <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto text-lg">
+    <span class="px-4 py-2 bg-sky-700 rounded-full hover:scale-110 transition">#AI</span>
+    <span class="px-4 py-2 bg-pink-600 rounded-full hover:scale-110 transition">#LoveLetters</span>
+    <span class="px-4 py-2 bg-emerald-600 rounded-full hover:scale-110 transition">#StartupTalks</span>
+    <span class="px-4 py-2 bg-yellow-600 rounded-full hover:scale-110 transition">#MentalHealth</span>
+    <!-- More tags -->
+  </div>
+</section>
 
 
 
@@ -570,6 +582,8 @@ function filterBlogs() {
 
 
 
+
+
 <script>
   // Scroll animation
   const observer = new IntersectionObserver(entries => {
@@ -592,16 +606,79 @@ function filterBlogs() {
 </script>
 
 
+<section class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 py-20 px-6 sm:px-12">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-5xl font-extrabold text-indigo-900 mb-6 drop-shadow-md">🎙️ BlogBeat Talks</h2>
+    <p class="text-indigo-700 max-w-xl mx-auto mb-16 text-lg font-medium tracking-wide">
+      Dive deep into voices and stories. Your favorite blogs, now in podcast form with style.
+    </p>
 
+    <div class="grid gap-12 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      
+      <!-- Podcast Card -->
+      <article
+        class="bg-white/30 backdrop-blur-md rounded-3xl p-7 shadow-lg border border-white/40 hover:scale-[1.04] transition-transform duration-300 flex flex-col"
+      >
+        <img
+          src="https://i5.walmartimages.com/asr/d76fa309-270a-4062-a465-e4762d8d46d4.edc9e579b976e9c365cbc26acba772a8.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff"
+          alt="Midnight Thoughts Cover"
+          class="rounded-2xl mb-6 object-cover w-full h-48 shadow-md"
+          loading="lazy"
+        />
+        <h3 class="text-2xl font-semibold text-indigo-900 mb-3">Ep. 07 – Midnight Thoughts</h3>
+        <p class="text-indigo-800 mb-5 flex-grow">A raw, personal blog turned podcast. Grab your headphones and get lost in thought.</p>
+        <audio controls class="w-full rounded-lg shadow-inner bg-white/80">
+          <source src="/static/audio/ep7.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </article>
 
+      <!-- Podcast Card -->
+      <article
+        class="bg-white/30 backdrop-blur-md rounded-3xl p-7 shadow-lg border border-white/40 hover:scale-[1.04] transition-transform duration-300 flex flex-col"
+      >
+        <img
+          src="https://dtimes.ng/wp-content/uploads/2025/01/dtimes-diaries-cover-.png"
+          alt="Startup Diaries Cover"
+          class="rounded-2xl mb-6 object-cover w-full h-48 shadow-md"
+          loading="lazy"
+        />
+        <h3 class="text-2xl font-semibold text-indigo-900 mb-3">Ep. 12 – Startup Diaries</h3>
+        <p class="text-indigo-800 mb-5 flex-grow">The struggles and highs of young founders, straight from BlogBeat. Listen and learn.</p>
+        <audio controls class="w-full rounded-lg shadow-inner bg-white/80">
+          <source src="/static/audio/ep12.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </article>
 
+      <!-- Podcast Card -->
+      <article
+        class="bg-white/30 backdrop-blur-md rounded-3xl p-7 shadow-lg border border-white/40 hover:scale-[1.04] transition-transform duration-300 flex flex-col"
+      >
+        <img
+          src="https://th.bing.com/th/id/OIP.MgAR0aw2h8ym7OiCuo_rFQHaDK?w=321&h=149&c=7&r=0&o=5&dpr=1.4&pid=1.7"
+          alt="Creative Pulse Cover"
+          class="rounded-2xl mb-6 object-cover w-full h-48 shadow-md"
+          loading="lazy"
+        />
+        <h3 class="text-2xl font-semibold text-indigo-900 mb-3">Ep. 15 – Creative Pulse</h3>
+        <p class="text-indigo-800 mb-5 flex-grow">Creators talk candidly about their journey and process. Inspiring and insightful.</p>
+        <audio controls class="w-full rounded-lg shadow-inner bg-white/80">
+          <source src="/static/audio/ep15.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </article>
+    </div>
 
-
-
-
-
-
-
+    <div class="mt-16">
+      <a
+        href="{% url 'podcasts' %}"
+        class="inline-block bg-indigo-700 hover:bg-indigo-800 text-white font-semibold text-lg px-8 py-3 rounded-full shadow-lg transition"
+        >🎧 Explore All Episodes</a
+      >
+    </div>
+  </div>
+</section>
 
 
 

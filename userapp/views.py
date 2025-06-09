@@ -93,6 +93,9 @@ def accept_friend_request(request, request_id):
     f_request.save()
     return redirect('profile', user_id=f_request.from_user.id)
 
+def podcs(request):
+    return render(request,"podcats.html")
+
 
 
     
