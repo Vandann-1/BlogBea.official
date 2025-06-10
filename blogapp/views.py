@@ -210,3 +210,40 @@ def ai_chat(request):
         except Exception as e:
             return JsonResponse({"reply": "Oops! Something went wrong."})
     return JsonResponse({"reply": "Invalid request."})
+
+
+
+# blog/views.py
+from django.http import JsonResponse
+import openai
+
+# Optional: Secure this later using env
+openai.api_key = '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'  # Replace with your actual OpenAI key
+
+
+def generate_title(request):
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a blog writing assistant."},
+                {"role": "user", "content": "Suggest a unique blog title on tech."},
+            ],
+            max_tokens=20,
+        )
+        title = response.choices[0].message.content.strip()
+        return JsonResponse({'title': title})
+    except Exception as e:
+        print("OpenAI error:", str(e))  # See error in terminal
+        return JsonResponse({'error': 'OpenAI Error'}, status=500)
+
+def generate_description(request):
+    if request.method == 'GET':
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": "Write a short, engaging blog description."}],
+            max_tokens=60,
+        )
+        description = response.choices[0].message['content'].strip()
+        return JsonResponse({"description": description})
+    return JsonResponse({"error": "Invalid request"}, status=400)

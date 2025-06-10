@@ -21,6 +21,8 @@ path('blog/<int:blog_id>/like/', like_blog, name='like_blog'),
 path('save-blog/<int:blog_id>/', savedblog, name="save-blog"),
 path('saved-blogs/', saved_blogs_view, name='saved_blogs'),
 path('remove-saved-blog/<int:blog_id>/',remove_saved_blog, name='remove_saved_blog'),
-
-
+path('generate-title/', generate_title, name='generate_title'),
+path('generate-description/',generate_description, name='generate_description'),
 ]
+
+

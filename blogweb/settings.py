@@ -36,6 +36,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+OPENAI_API_KEY = "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"
+
 
 from django.utils.translation import gettext_lazy as _
 
