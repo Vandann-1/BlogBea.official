@@ -218,7 +218,6 @@ from django.http import JsonResponse
 import openai
 
 # Optional: Secure this later using env
-openai.api_key = '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'  # Replace with your actual OpenAI key
 
 
 def generate_title(request):
