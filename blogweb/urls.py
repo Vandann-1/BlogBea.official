@@ -30,6 +30,7 @@ urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('userapp.urls')),
     path('', include('blogapp.urls')),
+    path('podcasts',include('podcasts.urls'))
 )
 
 # Static/media files

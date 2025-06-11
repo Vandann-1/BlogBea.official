@@ -37,6 +37,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# spotify
+SPOTIFY_CLIENT_ID = "5bfc5649e63549bfb827fb54ce97a3c6"
+SPOTIFY_CLIENT_SECRET = "e31092c85423477da58845158fa9fadc"
+SPOTIFY_REDIRECT_URI = "http://localhost:8000/spotify/callback/"
+
 
 
 from django.utils.translation import gettext_lazy as _
@@ -145,24 +150,15 @@ WSGI_APPLICATION = 'blogweb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        "postgresql://blogbeat_user:z8AGmUu5PBIDXwPh4ZG3JkvfCjVjawvE@dpg-d14ippjuibrs73agehf0-a.oregon-postgres.render.com/blogbeat"
+    )
 }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': "vd_11",
-#         "PORT":3306,
-#         "HOST":"localhost",
-#         "USER":"root",
-#         "PASSWORD":"root"
-#     }
-# }
 
 
 # Password validation
