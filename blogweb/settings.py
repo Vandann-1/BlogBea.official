@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure--v5t71sv6$z4j#fiot^y_4!_2ho@l%0!u+8ejmi)*0e=#38q$2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # spotify
