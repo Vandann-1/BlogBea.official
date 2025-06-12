@@ -34,7 +34,7 @@ class Blog(models.Model):
         return self.likes.count()
     
     def __str__(self):
-        return f'{self.title} - {self.user.username}'
+        return f'{self.title} - {self.user.username} - {self.firstname}'
 
     class Meta:
         db_table = "Blogs"  # to change table name in sql table

@@ -96,6 +96,9 @@ def accept_friend_request(request, request_id):
 def podcs(request):
     return render(request,"podcats.html")
 
+def dashboard(request):
+        return render(request, "das.html")
+
 
 
     

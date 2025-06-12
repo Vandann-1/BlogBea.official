@@ -30,7 +30,7 @@
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:flex items-center space-x-8 text-white font-semibold text-lg">
-      <a href="/services" class="relative group">
+      <a href="{% url 'dashboard' %}" class="relative group">
         Dashboard
         <span class="absolute -bottom-1 left-0 w-0 group-hover:w-full h-0.5 bg-sky-400 transition-all"></span>
       </a>
@@ -86,51 +86,53 @@
 
 
   <!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-r from-indigo-100 via-white to-pink-100 py-24 px-6 md:px-16">
-  <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-16 lg:gap-32 relative z-10">
+<section class="relative py-24 px-6 md:px-16 bg-gradient-to-br from-[#f0f4ff] via-white to-[#ffe6f0] overflow-hidden">
+  <!-- Decorative Background Bubbles -->
+  <div class="absolute -top-20 -left-20 w-80 h-80 bg-purple-300 opacity-20 rounded-full blur-3xl z-0"></div>
+  <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-pink-400 opacity-30 rounded-full blur-[120px] z-0"></div>
 
-    <!-- Left Text -->
-    <div class="lg:w-1/2 text-center lg:text-left">
-      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-4">
-        Blog. Express. Connect.<br>
-        <span class="bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 text-white px-3 py-1 rounded-xl inline-block mt-2 shadow-lg">
-          Welcome to BlogBeat 🚀
+  <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-20 relative z-10">
+
+    <!-- Left Section: Text -->
+    <div class="lg:w-1/2 text-center lg:text-left space-y-6">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-snug">
+        Dive Into<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600">
+          Stories That Matter ✨
         </span>
       </h1>
-      <p class="text-gray-700 text-lg max-w-lg mx-auto lg:mx-0 mt-4">
-        A modern community for writers, readers, and thinkers. Share your voice, discover stories, and engage with a platform built for expression.
+      <p class="text-gray-700 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+        BlogBeat is where imagination meets expression. Whether you're a storyteller, reader, or dreamer — this is your platform to connect, inspire, and grow.
       </p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-        <a href="/register" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-7 py-3 rounded-full shadow-xl hover:scale-105 transition-transform duration-300 font-medium">
-          ✍️ Start Writing
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+        <a href="/register" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-3 rounded-full shadow-md hover:scale-105 transition-transform duration-300 font-medium">
+          ✍️ Start Your Journey
         </a>
-        <a href="/blogs" class="bg-white text-indigo-600 border-2 border-indigo-600 px-7 py-3 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-300 font-medium">
-          🔍 Explore Blogs
+        <a href="/blogs" class="border border-indigo-600 text-indigo-700 bg-white hover:bg-indigo-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300 font-medium">
+          🔍 Browse Blogs
         </a>
       </div>
     </div>
 
-    <!-- Right Glass Card -->
-    <div class="lg:w-1/2 relative">
-      <div class="relative bg-white bg-opacity-10 backdrop-blur-xl border border-white/30 shadow-2xl rounded-3xl p-6 max-w-sm mx-auto">
+    <!-- Right Section: Featured Card -->
+    <div class="lg:w-1/2">
+      <div class="relative bg-white bg-opacity-10 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-3xl p-6 max-w-sm mx-auto transform hover:scale-[1.02] transition duration-300">
         {% load static %}
-        <img src="{% static 'img/logo.jpg' %}" alt="BlogBeat Logo" class="rounded-xl w-full h-72 object-cover" />
-        <div class="mt-4 text-center">
-          <p class="text-md text-white font-semibold">Your Creative Journey Starts Here</p>
+        <img src="{% static 'img/blogb.jpg' %}" alt="BlogBeat Logo" class="rounded-xl w-full h-72 object-cover shadow-md" />
+        <div class="mt-6 text-center">
+          <h3 class="text-xl font-semibold text-white">Welcome to <span class="text-indigo-300">BlogBeat</span></h3>
+          <p class="text-sm text-gray-100 mt-2">Create, connect, and let your words spark the world. 🚀</p>
         </div>
       </div>
 
-      <!-- Gradient Bubble Behind Image -->
-      <div class="absolute -top-16 -right-16 w-60 h-60 bg-gradient-to-br from-purple-500 via-blue-500 to-indigo-500 rounded-full blur-3xl opacity-30 z-0"></div>
+      <!-- Subtle Background Glow -->
+      <div class="absolute top-12 right-12 w-56 h-56 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full blur-2xl opacity-25 z-0"></div>
     </div>
-  </div>
 
-  <!-- Decorative Gradient Behind All -->
-  <div class="absolute inset-0 z-0">
-    <div class="absolute top-0 left-0 w-72 h-72 bg-pink-300 opacity-30 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-72 h-72 bg-indigo-300 opacity-20 rounded-full blur-2xl"></div>
   </div>
 </section>
+
 
 
 
@@ -254,54 +256,90 @@
 </section>
 
  
-<section class="bg-black text-white py-16 px-6 md:px-12">
-  <div class="max-w-7xl mx-auto text-center mb-12">
-    <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
-      Learn how to grow your blog from the experts
+<!-- BlogBeat Timeline Section -->
+<!-- Light Themed BlogBeat Journey & Learn Section with Glassmorphism -->
+<section class="bg-gradient-to-br from-white via-neutral-100 to-white py-20 px-6 md:px-12">
+  <!-- Section: BlogBeat Journey -->
+  <div class="max-w-7xl mx-auto text-center mb-20">
+    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 drop-shadow mb-4">
+      Your BlogBeat Journey
     </h2>
+    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+      Start small, grow big. Here’s how your journey unfolds with BlogBeat.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-28">
+    <!-- Step Cards -->
+    <div class="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition hover:scale-105">
+      <div class="text-4xl text-yellow-500 mb-4">📌</div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Step 1: Sign Up</h3>
+      <p class="text-gray-600 text-sm">Create your account and personalize your profile.</p>
+    </div>
+
+    <div class="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition hover:scale-105">
+      <div class="text-4xl text-yellow-500 mb-4">📝</div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Step 2: Write & Publish</h3>
+      <p class="text-gray-600 text-sm">Write with real-time previews and smart tools.</p>
+    </div>
+
+    <div class="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-gray-200 shadow-lg hover:shadow-xl transition hover:scale-105">
+      <div class="text-4xl text-yellow-500 mb-4">🚀</div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Step 3: Grow</h3>
+      <p class="text-gray-600 text-sm">Earn likes, followers, and grow your impact.</p>
+    </div>
+  </div>
+
+  <!-- Section: Expert Learning Tips -->
+  <div class="text-center mb-16">
+    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 drop-shadow mb-4">
+      Learn from the Experts
+    </h2>
+    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+      Discover curated insights to become a standout blogger on BlogBeat.
+    </p>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-    <!-- Card 1 -->
-    <div class="bg-white text-black rounded-xl overflow-hidden shadow-md transition transform hover:scale-105">
-      <img src="https://th.bing.com/th/id/OIP.eDOU3uHlzxPw1Kxb0mQcAQAAAA?rs=1&pid=ImgDetMain" alt="Blog guide" class="w-full h-56 object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg underline underline-offset-2 hover:text-blue-600">
-          <a href="#">The ultimate guide to starting a blog</a>
+    <!-- Tip Card 1 -->
+    <div class="bg-white/40 backdrop-blur-lg rounded-3xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition transform hover:scale-105">
+      <img src="https://th.bing.com/th/id/OIP.eDOU3uHlzxPw1Kxb0mQcAQAAAA?rs=1&pid=ImgDetMain" alt="Start Blog" class="w-full h-56 object-cover" />
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-yellow-500 underline underline-offset-4">
+          <a href="#">The Ultimate Guide to Starting a Blog</a>
         </h3>
       </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="bg-white text-black rounded-xl overflow-hidden shadow-md transition transform hover:scale-105">
+    <!-- Tip Card 2 -->
+    <div class="bg-white/40 backdrop-blur-lg rounded-3xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition transform hover:scale-105">
       <img src="https://img.freepik.com/premium-vector/promotion-landing-page-template_9209-5515.jpg" alt="Promotion tips" class="w-full h-56 object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg underline underline-offset-2 hover:text-blue-600">
-          <a href="#">Unique tips for promoting your blog</a>
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-yellow-500 underline underline-offset-4">
+          <a href="#">Unique Tips for Promoting Your Blog</a>
         </h3>
       </div>
     </div>
 
-    <!-- Card 3 -->
-    <div class="bg-white text-black rounded-xl overflow-hidden shadow-md transition transform hover:scale-105">
+    <!-- Tip Card 3 -->
+    <div class="bg-white/40 backdrop-blur-lg rounded-3xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition transform hover:scale-105">
       <img src="https://publir.com/blog/wp-content/uploads/2021/05/Digital-Monetization.jpeg" alt="Monetization tips" class="w-full h-56 object-cover" />
-      <div class="p-4">
-        <h3 class="font-semibold text-lg underline underline-offset-2 hover:text-blue-600">
-          <a href="#">Profitable strategies for monetizing your blog</a>
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-yellow-500 underline underline-offset-4">
+          <a href="#">Profitable Strategies for Monetizing Your Blog</a>
         </h3>
       </div>
     </div>
   </div>
 
-  <div class="text-center mt-12">
-    <a
-      href="#"
-      class="text-white text-lg font-semibold hover:underline underline-offset-2 transition"
-    >
-      Watch our blogging course →
+  <div class="text-center mt-16">
+    <a href="#" class="text-yellow-500 text-lg font-semibold hover:underline underline-offset-4 transition">
+      🎥 Watch our blogging course →
     </a>
   </div>
 </section>
+
+
 
 
 

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BlogBeat Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
+    }
+    .glass {
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+    .glass:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body class="text-gray-800 font-sans">
+
+  <section class="min-h-screen py-10 px-6">
+    <!-- Header -->
+    <div class="max-w-6xl mx-auto text-center mb-12">
+      <h1 class="text-5xl font-bold tracking-tight">
+        Welcome to <span class="text-yellow-500">Blog</span><span class="text-gray-800">Beat</span>
+      </h1>
+      <p class="text-gray-600 mt-2 text-lg">Your personalized blogging dashboard with insights & actions</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-14">
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-md text-gray-600 mb-1">Total Blogs</h3>
+        <p class="text-4xl font-bold text-gray-900">24</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-md text-gray-600 mb-1">Likes</h3>
+        <p class="text-4xl font-bold text-gray-900">312</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-md text-gray-600 mb-1">Followers</h3>
+        <p class="text-4xl font-bold text-gray-900">88</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <h3 class="text-md text-gray-600 mb-1">Comments</h3>
+        <p class="text-4xl font-bold text-gray-900">129</p>
+      </div>
+    </div>
+
+    <!-- Blog Activity + Actions -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <!-- Recent Blogs -->
+      <div class="lg:col-span-2 glass rounded-2xl p-6">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">📝 Recent Blogs</h2>
+        <ul class="divide-y divide-gray-300/40">
+          <li class="py-3 flex justify-between items-center text-gray-700">
+            <span>✍️ How to Write Engaging Content</span>
+            <span class="text-sm text-gray-500">3d ago</span>
+          </li>
+          <li class="py-3 flex justify-between items-center text-gray-700">
+            <span>📊 2025 Blogging Trends</span>
+            <span class="text-sm text-gray-500">1w ago</span>
+          </li>
+          <li class="py-3 flex justify-between items-center text-gray-700">
+            <span>🎯 Building Audience Trust</span>
+            <span class="text-sm text-gray-500">2w ago</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="space-y-6">
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-md font-medium text-gray-700 mb-2">⚡ Quick Actions</h3>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-yellow-500 transition">➕ New Blog</a></li>
+            <li><a href="#" class="hover:text-yellow-500 transition">📈 View Stats</a></li>
+            <li><a href="#" class="hover:text-yellow-500 transition">⚙️ Account Settings</a></li>
+          </ul>
+        </div>
+
+        <div class="text-center">
+          <a href="/add-blog" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition">
+            ✍️ Start Writing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

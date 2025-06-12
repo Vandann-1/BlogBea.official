@@ -23,44 +23,49 @@
 
   <body class="bg-white text-gray-800">
     <!-- HEADER -->
-    <header class="bg-gradient-to-r from-blue-700 to-blue-500 text-white shadow-md fixed top-0 left-0 right-0 z-50 px-6 py-3 flex justify-between items-center">
+    <header class="bg-gradient-to-r from-blue-700 to-blue-500 text-white shadow-lg fixed top-0 left-0 right-0 z-50 px-8 py-5 flex justify-between items-center text-base md:text-lg">
       <!-- Logo -->
-      <a href="#" class="text-2xl font-bold tracking-wide hover:text-accent transition-all">BlogBeat</a>
+      <a href="/" class="text-3xl font-bold tracking-wide hover:text-accent transition-all">
+        Blog<span class="text-yellow-300">Beat</span>
+      </a>
 
       <!-- Mobile Menu Icon -->
-      <div class="md:hidden block text-3xl cursor-pointer" onclick="toggleMenu()">☰</div>
+      <div class="md:hidden block text-4xl cursor-pointer" onclick="toggleMenu()">☰</div>
 
-      <!-- Navigation -->
-      <nav id="navbar" class="hidden md:flex space-x-6 items-center font-medium text-sm">
+      <!-- Navigation Links -->
+      <nav id="navbar" class="hidden md:flex items-center space-x-8 font-medium text-white">
         {% if user.is_authenticated %}
-        <a href="/add-blog" class="hover:text-accent transition-all">Add Blogs</a>
-        <a href="/" class="hover:text-accent transition-all">All Blogs</a>
+        <a href="/add-blog" class="hover:text-yellow-200 transition-all">Add Blogs</a>
+        <a href="/" class="hover:text-yellow-200 transition-all">All Blogs</a>
 
-        <!-- Profile with Dropdown -->
+        <!-- Profile Dropdown -->
         <div class="relative group">
-          <img
-            src="{% static 'img/th.jpg' %}"
-            alt="Profile"
-            class="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
-          />
-          <div
-            class="absolute right-0 mt-2 w-52 bg-white text-black rounded-lg shadow-lg p-2 hidden group-hover:flex flex-col z-50"
-          >
+          <div class="flex items-center space-x-2 cursor-pointer">
+            <img
+              src="{% static 'img/th.jpg' %}"
+              alt="Profile"
+              class="w-10 h-10 rounded-full border-2 border-white"
+            />
+            <span class="hidden md:inline-block font-semibold">{{ user.username }}</span>
+            <svg class="w-4 h-4 mt-1 text-white group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z"/>
+            </svg>
+          </div>
+          <div class="absolute right-0 mt-3 w-56 bg-white text-black rounded-xl shadow-lg p-3 hidden group-hover:flex flex-col z-50">
             <div class="px-3 py-2">
               <p class="font-semibold">{{ user.username }}</p>
-              <p class="text-xs">{{ user.email }}</p>
+              <p class="text-xs text-gray-500">{{ user.email }}</p>
             </div>
             <hr />
-            <a href="/my-blog" class="px-3 py-2 hover:bg-gray-100 rounded">My Blog</a>
-            <a href="/settings" class="px-3 py-2 hover:bg-gray-100 rounded">Settings</a>
-            <a href="/saved-blogs" class="px-3 py-2 hover:bg-gray-100 rounded">Saved Blogs</a>
-            <a href="/logout" class="px-3 py-2 text-red-600 hover:bg-gray-100 rounded">Logout</a>
+            <a href="/my-blog" class="px-3 py-2 hover:bg-gray-100 rounded">📘 My Blog</a>
+            <a href="/settings" class="px-3 py-2 hover:bg-gray-100 rounded">⚙️ Settings</a>
+            <a href="/saved-blogs" class="px-3 py-2 hover:bg-gray-100 rounded">💾 Saved Blogs</a>
+            <a href="/logout" class="px-3 py-2 text-red-600 hover:bg-gray-100 rounded">🚪 Logout</a>
           </div>
         </div>
-
         {% else %}
-        <a href="/" class="hover:text-accent">Signup</a>
-        <a href="{% url 'login' %}" class="hover:text-accent">Login</a>
+        <a href="/" class="hover:text-yellow-200">Signup</a>
+        <a href="{% url 'login' %}" class="hover:text-yellow-200">Login</a>
         {% endif %}
       </nav>
     </header>
@@ -73,15 +78,16 @@
         nav.classList.toggle("flex");
         nav.classList.toggle("flex-col");
         nav.classList.toggle("absolute");
-        nav.classList.toggle("right-6");
-        nav.classList.toggle("top-20");
         nav.classList.toggle("bg-gradient-to-r");
         nav.classList.toggle("from-blue-700");
         nav.classList.toggle("to-blue-500");
-        nav.classList.toggle("rounded-lg");
-        nav.classList.toggle("p-4");
+        nav.classList.toggle("rounded-xl");
+        nav.classList.toggle("top-20");
+        nav.classList.toggle("right-6");
+        nav.classList.toggle("p-6");
         nav.classList.toggle("space-y-4");
-        nav.classList.toggle("z-50");
+        nav.classList.toggle("shadow-xl");
+        nav.classList.toggle("z-40");
       }
     </script>
   </body>
