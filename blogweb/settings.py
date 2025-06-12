@@ -17,8 +17,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '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'
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,7 +31,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--v5t71sv6$z4j#fiot^y_4!_2ho@l%0!u+8ejmi)*0e=#38q$2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
