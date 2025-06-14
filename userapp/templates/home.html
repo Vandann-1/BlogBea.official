@@ -61,7 +61,7 @@ body {
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Hero Section -->
-<section class="relative pt-32 pb-24 bg-gradient-to-b from-primary to-accent text-white text-center overflow-hidden">
+<section class="w-full relative pt-32 pb-24 bg-gradient-to-b from-primary to-accent text-white text-center overflow-hidden">
   <!-- Subtle glowing background element -->
   <div class="absolute inset-0 -z-10">
     <div class="absolute top-1/2 left-1/2 w-[80vw] h-[80vw] -translate-x-1/2 -translate-y-1/2 bg-white opacity-10 blur-[120px] rounded-full"></div>
@@ -99,38 +99,50 @@ body {
 
 
  <!-- slider section -->
-{%load static%}
-<br> 
-<h2 style="text-align: center;">Trending Blogs</h2>
 {% load static %}
 
-<div class="relative w-[90vw] max-w-[1500px] h-[450px] mx-auto my-12 overflow-hidden rounded-xl shadow-lg flex justify-center items-center bg-gray-100">
-  <div id="slider" class="flex w-full h-full transition-transform duration-500 ease-in-out">
-    <div class="slide min-w-full h-full flex justify-center items-center">
-      <a href="{% static 'img/W.webp' %}">
-        <img src="{% static 'img/W.webp' %}" alt="Trending Blog 1" class="w-full h-full object-cover rounded-xl" />
-      </a>
+<!-- Trending Blogs Section -->
+<section id="trending-blogs" role="region" aria-label="Trending Blog Posts" class="w-full bg-white py-12">
+  <h2 class="text-3xl font-bold text-center mb-8">Trending Blogs</h2>
+
+  <div class="relative w-[95vw] max-w-[1500px] h-[450px] mx-auto overflow-hidden rounded-xl shadow-lg flex justify-center items-center bg-gray-100 group">
+    
+    <!-- Slider Wrapper -->
+    <div id="slider" class="flex w-full h-full transition-transform duration-500 ease-in-out">
+      
+      <!-- Slide 1 -->
+      <div class="slide min-w-full h-full flex justify-center items-center">
+        <a href="{% static 'img/W.webp' %}">
+          <img src="{% static 'img/W.webp' %}" alt="Trending Blog 1" class="w-full h-full object-cover rounded-xl" />
+        </a>
+      </div>
+      
+      <!-- Slide 2 -->
+      <div class="slide min-w-full h-full flex justify-center items-center">
+        <a href="{% static 'img/m.webp' %}">
+          <img src="{% static 'img/m.webp' %}" alt="Trending Blog 2" class="w-full h-full object-cover rounded-xl" />
+        </a>
+      </div>
+      
+      <!-- Slide 3 -->
+      <div class="slide min-w-full h-full flex justify-center items-center">
+        <a href="{% static 'img/co.webp' %}">
+          <img src="{% static 'img/co.webp' %}" alt="Trending Blog 3" class="w-full h-full object-cover rounded-xl" />
+        </a>
+      </div>
+
     </div>
-    <div class="slide min-w-full h-full flex justify-center items-center">
-      <a href="{% static 'img/m.webp' %}">
-        <img src="{% static 'img/m.webp' %}" alt="Trending Blog 2" class="w-full h-full object-cover rounded-xl" />
-      </a>
-    </div>
-    <div class="slide min-w-full h-full flex justify-center items-center">
-      <a href="{% static 'img/co.webp' %}">
-        <img src="{% static 'img/co.webp' %}" alt="Trending Blog 3" class="w-full h-full object-cover rounded-xl" />
-      </a>
+
+    <!-- Dots Navigation -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+      <button class="dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 focus:outline-none" aria-label="Slide 1" onclick="currentSlide(0)"></button>
+      <button class="dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 focus:outline-none" aria-label="Slide 2" onclick="currentSlide(1)"></button>
+      <button class="dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 focus:outline-none" aria-label="Slide 3" onclick="currentSlide(2)"></button>
     </div>
   </div>
+</section>
 
-  <!-- Dots navigation -->
-  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-    <button class="dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 focus:outline-none" aria-label="Slide 1" onclick="currentSlide(0)"></button>
-    <button class="dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 focus:outline-none" aria-label="Slide 2" onclick="currentSlide(1)"></button>
-    <button class="dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 focus:outline-none" aria-label="Slide 3" onclick="currentSlide(2)"></button>
-  </div>
-</div>
-
+<!-- Slider Script -->
 <script>
   const slider = document.getElementById('slider');
   const dots = document.querySelectorAll('.dot');
@@ -138,10 +150,7 @@ body {
   let slideIndex = 0;
 
   function updateSlider() {
-    // Move slider using translateX
     slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-
-    // Update dots
     dots.forEach((dot, i) => {
       dot.classList.toggle('bg-gray-600', i === slideIndex);
       dot.classList.toggle('bg-gray-400', i !== slideIndex);
@@ -160,35 +169,37 @@ body {
     updateSlider();
   }
 
-  // Initial update
+  // Start slider
   updateSlider();
-  // Auto slide
   setTimeout(showSlides, 5000);
 </script>
 
 
 
   <!-- Search Bar -->
-<div class="flex justify-center items-center mt-10 space-x-3 px-4">
-  <div class="relative w-full max-w-xl">
-    <input 
-      type="text" 
-      id="searchBar" 
-      placeholder="Search blogs..."
-      onkeyup="filterBlogs()"
-      class="w-full pl-5 pr-16 py-3 text-lg rounded-xl bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-300"
-    />
-    <button 
-      type="button" 
-      onclick="filterBlogs()" 
-      class="absolute top-1/2 right-2 -translate-y-1/2 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg shadow-sm transition-all duration-300"
-    >
-      Search
-    </button>
+<!-- Search Bar Section -->
+<section class="w-full bg-gray-50 py-8">
+  <div class="w-full max-w-4xl mx-auto px-4">
+    <div class="relative">
+      <input 
+        type="text" 
+        id="searchBar" 
+        placeholder="Search blogs..." 
+        onkeyup="filterBlogs()"
+        class="w-full pl-5 pr-20 py-3 text-lg rounded-xl bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-300"
+      />
+      <button 
+        type="button" 
+        onclick="filterBlogs()" 
+        class="absolute top-1/2 right-3 -translate-y-1/2 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg shadow-sm transition-all duration-300"
+      >
+        Search
+      </button>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- JavaScript filter function -->
+<!-- JavaScript Blog Filter Function -->
 <script>
   function filterBlogs() {
     let input = document.getElementById('searchBar').value.toLowerCase();
@@ -198,7 +209,7 @@ body {
     for (let i = 0; i < blogs.length; i++) {
       let title = blogs[i].querySelector(".course-title").textContent.toLowerCase();
       let desc = blogs[i].querySelector(".course-desc").textContent.toLowerCase();
-      
+
       if (title.includes(input) || desc.includes(input)) {
         blogs[i].style.display = "block";
       } else {
@@ -207,6 +218,7 @@ body {
     }
   }
 </script>
+
 
 
 
