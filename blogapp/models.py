@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User 
-
+from django.utils.text import slugify
+import random 
+import string
+import time
 
 # Create your models here.
 # class Blog(models.Model):
@@ -18,8 +21,15 @@ from django.db import models
 # from django.contrib.auth.models import User
 from django.utils import timezone
 
+
+def generate_random_string(length=6):
+    letters_and_digits = string.ascii_letters + string.digits
+    return ''.join(random.choice(letters_and_digits) for _ in range(length))
+
+
 # Create your models here.
 class Blog(models.Model):
+    slug = models.SlugField(max_length=60, unique=True, null=True, blank=True)
     title = models.CharField(max_length=50)
     description = models.TextField()  # Changed to TextField for longer descriptions
      # Changed to DateTimeField for more precision
@@ -30,11 +40,31 @@ class Blog(models.Model):
     created_at = models.DateTimeField(default=timezone.now) 
     likes = models.ManyToManyField(User, related_name='liked_blogs', blank=True)
 
+    # Generate an unique Slug identifier for room creation
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            
+    
+            timestamp = str(int(time.time())) 
+            random_str = generate_random_string(6)
+            
+            complex_slug = f"{base_slug}-{timestamp}-{random_str}"
+            
+        
+            while Blog.objects.filter(slug=complex_slug).exists():
+                random_str = generate_random_string(6)
+                complex_slug = f"{base_slug}-{timestamp}-{random_str}"
+            
+            self.slug = complex_slug
+
+        super().save(*args, **kwargs)
+
     def total_likes(self):
         return self.likes.count()
     
     def __str__(self):
-        return f'{self.title} - {self.user.username} - {self.firstname}'
+        return f'{self.title} - {self.user.username} -'
 
     class Meta:
         db_table = "Blogs"  # to change table name in sql table

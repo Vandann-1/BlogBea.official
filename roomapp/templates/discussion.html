@@ -1,0 +1,27 @@
+<h2>Discussion Room: {{ room_name }}</h2>
+<div id="chat-log" class="space-y-2 p-3 bg-gray-100 rounded-lg h-64 overflow-y-scroll mb-3"></div>
+<input id="chat-message-input" type="text" class="border px-3 py-2 rounded w-2/3" />
+<button id="send" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+
+<script>
+  const roomName = "{{ room_name }}";
+  const chatSocket = new WebSocket(
+    'ws://' + window.location.host + '/ws/room/' + roomName + '/'
+  );
+
+  chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    const log = document.querySelector('#chat-log');
+    log.innerHTML += '<div class="p-2 bg-white shadow rounded">' + data.message + '</div>';
+    log.scrollTop = log.scrollHeight; // Auto-scroll
+  };
+
+  document.querySelector('#send').onclick = function() {
+    const input = document.querySelector('#chat-message-input');
+    const message = input.value;
+    if (message.trim() !== '') {
+      chatSocket.send(JSON.stringify({ 'message': message }));
+      input.value = '';
+    }
+  };
+</script>

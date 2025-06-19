@@ -19,6 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = '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'
 DEBUG = True
 
+SECRET_KEY = "django-insecure-abc123$randomkey!@#generated"
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -31,8 +33,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS: ['127.0.0.1', 'localhost', 'blogbeat-1-sn2e.onrender.com']
-
+ALLOWED_HOSTS: []
 
 
 # spotify
@@ -76,10 +77,22 @@ INSTALLED_APPS = [
     'django_cron',
     'corsheaders',    
     'roomapp' , 
-    'podcasts'
+    'podcasts',
+    'channels'
 
 ]
 
+
+ASGI_APPLICATION = 'blogweb.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # # EMAIL_HOST = 'smtp.gmail.com'
@@ -151,10 +164,12 @@ WSGI_APPLICATION = 'blogweb.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        "postgresql://blogbeat_user:z8AGmUu5PBIDXwPh4ZG3JkvfCjVjawvE@dpg-d14ippjuibrs73agehf0-a.oregon-postgres.render.com/blogbeat"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
 
 
 
