@@ -1,39 +1,80 @@
-<div class="border rounded-lg p-4 bg-white shadow-md max-w-2xl mx-auto my-10">
-  <h2 class="text-xl font-semibold mb-4">💬 Join the Discussion</h2>
-  <div id="chat-box" class="h-64 overflow-y-scroll bg-gray-100 p-3 mb-2 rounded"></div>
-  <input id="chat-input" type="text" placeholder="Type a message..." class="w-full border px-4 py-2 rounded mb-2" />
-  <button id="chat-send-btn" class="bg-sky-600 text-white px-4 py-2 rounded">Send</button>
-</div>
+<form method="POST" action="" class="flex items-center gap-3 mt-4">
+  {% csrf_token %}
 
+  <!-- Hidden file upload -->
+  <label for="file-upload" class="cursor-pointer p-3 bg-gray-100 hover:bg-gray-200 rounded-xl shadow-sm">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+    </svg>
+    <input type="file" id="file-upload" class="hidden" />
+  </label>
+
+  <!-- ✅ Add id="chat-input" -->
+  <input id="chat-input" type="text" name="content" placeholder="Type your message..."
+         class="flex-1 px-4 py-3 border border-gray-300 rounded-xl shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white"
+         required>
+
+  <!-- ✅ Add id="chat-send-btn" -->
+  <button id="chat-send-btn" type="button"
+          class="bg-purple-700 hover:bg-purple-800 text-white px-5 py-2 rounded-xl font-semibold shadow-md">
+    Send
+  </button>
+</form>
+
+<!-- ✅ Place this before </body> -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const slug = "{{ blog.slug|escapejs }}";
-
-    if (!slug) {
-      console.error("❌ blog.slug is not defined — check if context has 'blog'");
-      return;
-    }
+    console.log("🔷 Chat slug:", slug);
 
     const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/blogchat/" + slug + "/");
 
-    chatSocket.onmessage = function (e) {
+    chatSocket.onopen = () => {
+      console.log("✅ WebSocket connected");
+    };
+
+    chatSocket.onerror = (e) => console.error("❌ WebSocket error", e);
+    chatSocket.onclose = (e) => console.warn("⚠️ WebSocket closed", e);
+
+    chatSocket.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      const chatBox = document.querySelector("#chat-box");
-      chatBox.innerHTML += `<p><strong>${data.user}</strong>: ${data.message}</p>`;
+      console.log("📥 Message:", data);
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML += `
+        <div class="flex items-start space-x-3">
+          <div class="w-8 h-8 bg-purple-300 text-white rounded-full flex items-center justify-center text-xs font-bold">
+            ${data.user.charAt(0).toUpperCase()}
+          </div>
+          <div class="bg-white border max-w-[70%] p-2 px-4 rounded-xl rounded-bl-none shadow-sm text-sm">
+            <div class="font-medium text-purple-700">${data.user}</div>
+            <div>${data.message}</div>
+          </div>
+        </div>
+      `;
       chatBox.scrollTop = chatBox.scrollHeight;
     };
 
-    document.querySelector("#chat-send-btn").addEventListener("click", function () {
-      const input = document.querySelector("#chat-input");
-      const message = input.value.trim();
-      if (message.length === 0) return;
+    // ✅ Get DOM elements safely
+    const sendBtn = document.getElementById("chat-send-btn");
+    const input = document.getElementById("chat-input");
 
-      if (chatSocket.readyState === WebSocket.OPEN) {
-        chatSocket.send(JSON.stringify({ message: message }));
-        input.value = "";
-      } else {
-        alert("WebSocket not connected.");
-      }
-    });
+    if (sendBtn && input) {
+      sendBtn.addEventListener("click", function () {
+        const message = input.value.trim();
+        if (message === "") {
+          console.log("⚠️ Empty message");
+          return;
+        }
+
+        if (chatSocket.readyState === WebSocket.OPEN) {
+          chatSocket.send(JSON.stringify({ message }));
+          input.value = "";
+        } else {
+          alert("WebSocket not ready yet.");
+        }
+      });
+    } else {
+      console.error("❌ Elements not found: chat-send-btn or chat-input");
+    }
   });
 </script>
