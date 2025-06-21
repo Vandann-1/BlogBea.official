@@ -1,39 +1,61 @@
 <div class="border rounded-lg p-4 bg-white shadow-md max-w-2xl mx-auto my-10">
-  <h2 class="text-xl font-semibold mb-4">💬 Live Chat</h2>
+  <h2 class="text-xl font-semibold mb-4">💬 Join the Discussion</h2>
   <div id="chat-box" class="h-64 overflow-y-scroll bg-gray-100 p-3 mb-2 rounded"></div>
   <input id="chat-input" type="text" placeholder="Type a message..." class="w-full border px-4 py-2 rounded mb-2" />
-  <button onclick="sendMessage()" class="bg-sky-600 text-white px-4 py-2 rounded">Send</button>
+  <button id="chat-send-btn" class="bg-sky-600 text-white px-4 py-2 rounded">Send</button>
 </div>
 
-<!-- <script>
-  const slug = "{{ blog.slug }}";
-  console.log("Slug from Django:", slug);
-  const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/room/" + slug + "/");
-</script> -->
-
-
-<!-- <script>
-  const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/blogchat/" + slug + "/");
-
-  chatSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
-    document.querySelector("#chat-box").innerHTML += `<p><strong>${data.user}</strong>: ${data.message}</p>`;
-    document.querySelector("#chat-box").scrollTop = document.querySelector("#chat-box").scrollHeight;
-  }
-
-  function sendMessage() {
-    const input = document.querySelector("#chat-input");
-    chatSocket.send(JSON.stringify({ message: input.value }));
-    input.value = "";
-  }
-</script> -->
 <script>
-  const rawSlug = "{{ blog.slug|default:'__EMPTY__' }}";
-  console.log("🔍 Rendered Slug:", rawSlug);
+  document.addEventListener("DOMContentLoaded", function () {
+    const slug = "{{ blog.slug|escapejs }}";
 
-  if (rawSlug === '__EMPTY__') {
-    alert("Blog slug is missing. Check Django view/template!");
-  }
+    if (!slug) {
+      console.error("❌ [Chat] blog.slug is not defined — check if it's passed in context.");
+      return;
+    }
 
-  const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/room/" + rawSlug + "/");
+    console.log("🔷 [Chat] Initializing WebSocket for slug:", slug);
+
+    const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/blogchat/" + slug + "/");
+
+    chatSocket.onopen = () => {
+      console.log("✅ [Chat] WebSocket connection established");
+    };
+
+    chatSocket.onclose = (e) => {
+      console.warn("⚠️ [Chat] WebSocket connection closed unexpectedly", e);
+    };
+
+    chatSocket.onerror = (err) => {
+      console.error("❌ [Chat] WebSocket error:", err);
+    };
+
+    chatSocket.onmessage = function (e) {
+      const data = JSON.parse(e.data);
+      console.log("📥 [Chat] Message received:", data);
+
+      const chatBox = document.querySelector("#chat-box");
+      chatBox.innerHTML += `<p><strong>${data.user}</strong>: ${data.message}</p>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    };
+
+    document.querySelector("#chat-send-btn").addEventListener("click", function () {
+      const input = document.querySelector("#chat-input");
+      const message = input.value.trim();
+      if (message.length === 0) {
+        console.log("⚠️ [Chat] Empty message — not sending.");
+        return;
+      }
+
+      if (chatSocket.readyState === WebSocket.OPEN) {
+        const payload = JSON.stringify({ message: message });
+        chatSocket.send(payload);
+        console.log("📤 [Chat] Sent message:", payload);
+        input.value = "";
+      } else {
+        console.error("❌ [Chat] WebSocket is not open. Current state:", chatSocket.readyState);
+        alert("WebSocket not connected yet.");
+      }
+    });
+  });
 </script>

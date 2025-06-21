@@ -66,12 +66,12 @@ LOCALE_PATHS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
     'userapp',
     'blogapp',
@@ -80,15 +80,16 @@ INSTALLED_APPS = [
     'roomapp' , 
     'podcasts',
     'channels',
+
     
 
 ]
 
 
-ASGI_APPLICATION ='blogweb.asgi:application'
+ASGI_APPLICATION='blogweb.asgi:application'
 
 
-# Channel Layers with Redis
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
