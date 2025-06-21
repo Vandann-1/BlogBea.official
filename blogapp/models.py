@@ -31,7 +31,7 @@ def generate_random_string(length=6):
 class Blog(models.Model):
     slug = models.SlugField(max_length=60, unique=True, null=True, blank=True)
     title = models.CharField(max_length=50)
-    description = models.TextField()  # Changed to TextField for longer descriptions
+    description = models.TextField()                     # Changed to TextField for longer descriptions
      # Changed to DateTimeField for more precision
     blog_image = models.ImageField(upload_to="blogimages/")
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # it means delete all user blog

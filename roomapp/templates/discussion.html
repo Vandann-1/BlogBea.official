@@ -1,27 +1,39 @@
-<h2>Discussion Room: {{ room_name }}</h2>
-<div id="chat-log" class="space-y-2 p-3 bg-gray-100 rounded-lg h-64 overflow-y-scroll mb-3"></div>
-<input id="chat-message-input" type="text" class="border px-3 py-2 rounded w-2/3" />
-<button id="send" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+<div class="border rounded-lg p-4 bg-white shadow-md max-w-2xl mx-auto my-10">
+  <h2 class="text-xl font-semibold mb-4">💬 Live Chat</h2>
+  <div id="chat-box" class="h-64 overflow-y-scroll bg-gray-100 p-3 mb-2 rounded"></div>
+  <input id="chat-input" type="text" placeholder="Type a message..." class="w-full border px-4 py-2 rounded mb-2" />
+  <button onclick="sendMessage()" class="bg-sky-600 text-white px-4 py-2 rounded">Send</button>
+</div>
 
-<script>
-  const roomName = "{{ room_name }}";
-  const chatSocket = new WebSocket(
-    'ws://' + window.location.host + '/ws/room/' + roomName + '/'
-  );
+<!-- <script>
+  const slug = "{{ blog.slug }}";
+  console.log("Slug from Django:", slug);
+  const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/room/" + slug + "/");
+</script> -->
+
+
+<!-- <script>
+  const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/blogchat/" + slug + "/");
 
   chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
-    const log = document.querySelector('#chat-log');
-    log.innerHTML += '<div class="p-2 bg-white shadow rounded">' + data.message + '</div>';
-    log.scrollTop = log.scrollHeight; // Auto-scroll
-  };
+    document.querySelector("#chat-box").innerHTML += `<p><strong>${data.user}</strong>: ${data.message}</p>`;
+    document.querySelector("#chat-box").scrollTop = document.querySelector("#chat-box").scrollHeight;
+  }
 
-  document.querySelector('#send').onclick = function() {
-    const input = document.querySelector('#chat-message-input');
-    const message = input.value;
-    if (message.trim() !== '') {
-      chatSocket.send(JSON.stringify({ 'message': message }));
-      input.value = '';
-    }
-  };
+  function sendMessage() {
+    const input = document.querySelector("#chat-input");
+    chatSocket.send(JSON.stringify({ message: input.value }));
+    input.value = "";
+  }
+</script> -->
+<script>
+  const rawSlug = "{{ blog.slug|default:'__EMPTY__' }}";
+  console.log("🔍 Rendered Slug:", rawSlug);
+
+  if (rawSlug === '__EMPTY__') {
+    alert("Blog slug is missing. Check Django view/template!");
+  }
+
+  const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/room/" + rawSlug + "/");
 </script>

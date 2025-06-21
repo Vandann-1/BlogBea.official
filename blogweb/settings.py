@@ -66,6 +66,7 @@ LOCALE_PATHS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,20 +79,24 @@ INSTALLED_APPS = [
     'corsheaders',    
     'roomapp' , 
     'podcasts',
-    'channels'
+    'channels',
+    
 
 ]
 
 
-ASGI_APPLICATION = 'blogweb.asgi.application'
+ASGI_APPLICATION ='blogweb.asgi:application'
 
+
+# Channel Layers with Redis
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            'hosts': [('127.0.0.1', 6379)],
         },
     },
+
 }
 
 # # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -14,12 +14,14 @@ def join_discussion(request,blog_slug):
     if request.user != blog.user and not blog:
         return HttpResponseForbidden('Unauthorized Access!!')
 
-    return render(request,'discussion.html', {'blog':blog} )
+    return render(request,'discus.html', {'blog':blog} )
 
 
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Blog  # import your Blog model
 
-def room(request, room_name):
-    return render(request, 'discussion.html', {'room_name': blog.slug})
+def blog_detail(request, slug):
+    blog = get_object_or_404(Blog, slug=blog_slug)
+    return render(request, 'discussion.html', {'blog': blog})
 

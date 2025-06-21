@@ -14,79 +14,113 @@
 </head>
 <body class="bg-white text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-[#0a1f44] to-[#0b1b3f] shadow-lg px-6 md:px-10 py-4 fixed w-full top-0 left-0 z-50 backdrop-blur-md">
-    <div class="flex items-center justify-between max-w-7xl mx-auto">
+<header class="bg-white/80 backdrop-blur-md shadow-md border-b border-gray-200 fixed top-0 left-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between py-3">
 
-      <!-- Brand Logo -->
-      <a href="/" class="flex items-center gap-3 group">
-        <span class="text-3xl font-black tracking-tight text-white group-hover:text-sky-400 transition-all duration-300">
-          Blog<span class="text-sky-400 group-hover:text-white transition">Beat</span>
-        </span>
-        <div class="h-10 w-10 p-[2px] rounded-full bg-gradient-to-br from-white/70 via-sky-300 to-white shadow-inner shadow-sky-200">
-          <img src="{% static 'img/lg.png' %}" alt="BlogBeat Logo" class="h-full w-full object-contain rounded-full bg-white p-1" />
-        </div>
-      </a>
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="h-10 w-10 p-[2px] rounded-full bg-gradient-to-br from-white via-sky-300 to-white shadow-inner shadow-sky-100">
+        <img src="{% static 'img/lg.png' %}" alt="BlogBeat Logo" class="h-full w-full object-contain rounded-full bg-white p-1" />
+      </div>
+      <span class="text-2xl font-extrabold text-gray-900 tracking-tight group-hover:text-sky-600 transition-all duration-300">
+        Blog<span class="text-sky-500">Beat</span>
+      </span>
+    </a>
 
-      <!-- Navigation -->
-      <nav class="hidden md:flex items-center space-x-10 text-white font-medium tracking-wide text-lg">
-        <a href="{% url 'dashboard' %}" class="relative group transition-all">
-          Dashboard
-          <span class="absolute -bottom-1 left-0 h-0.5 bg-sky-400 w-0 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="{% url 'register' %}" class="relative group transition-all">
-          Register
-          <span class="absolute -bottom-1 left-0 h-0.5 bg-sky-400 w-0 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="{% url 'login' %}" class="relative group transition-all">
-          Login
-          <span class="absolute -bottom-1 left-0 h-0.5 bg-sky-400 w-0 group-hover:w-full transition-all duration-300"></span>
-        </a>
-      </nav>
-
-      <!-- Mobile Toggle -->
-      <button id="mobile-menu-toggle" aria-label="Toggle Menu" class="md:hidden relative w-8 h-8 flex flex-col justify-between items-center">
-        <span class="block h-1 w-full bg-white rounded transition-transform duration-300 origin-center" id="line1"></span>
-        <span class="block h-1 w-full bg-white rounded transition-opacity duration-300" id="line2"></span>
-        <span class="block h-1 w-full bg-white rounded transition-transform duration-300 origin-center" id="line3"></span>
-      </button>
+    <!-- Search Bar (Desktop Only) -->
+    <div class="hidden lg:block flex-grow px-8">
+      <input type="text" placeholder="Search BlogBeat..." class="w-full max-w-md px-5 py-2 text-sm rounded-full border border-gray-300 focus:ring-2 focus:ring-sky-400 outline-none bg-white shadow-sm" />
     </div>
-  </header>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="fixed inset-0 bg-white/10 backdrop-blur-xl text-white text-xl font-semibold transform -translate-y-full transition-transform duration-500 md:hidden z-40 flex flex-col items-center justify-center space-y-10">
-    <a href="{% url 'dashboard' %}" class="hover:text-sky-400 transition text-2xl tracking-wide">Dashboard</a>
-    <a href="{% url 'register' %}" class="hover:text-sky-400 transition text-2xl tracking-wide">Register</a>
-    <a href="{% url 'login' %}" class="hover:text-sky-400 transition text-2xl tracking-wide">Login</a>
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center space-x-6 text-gray-700 font-medium text-sm">
+      <a href="{% url 'dashboard' %}" class="hover:text-sky-600 transition">Dashboard</a>
+
+      <!-- Buttons & Language -->
+      <a href="{% url 'login' %}" class="px-4 py-1.5 border border-sky-500 text-sky-600 rounded-full hover:bg-sky-50 transition">
+        Log in
+      </a>
+      <div class="relative flex items-center gap-2">
+        <a href="{% url 'register' %}" class="px-4 py-1.5 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition font-semibold">
+          Sign up
+        </a>
+        <!-- Language Selector -->
+        <div class="relative group">
+          <button class="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full text-sm hover:bg-gray-100 transition">
+            🌐 <span class="hidden sm:inline">EN</span>
+          </button>
+          <div class="absolute right-0 mt-2 w-36 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-300 z-50">
+            <a href="?lang=en" class="block px-4 py-2 text-sm hover:bg-gray-100">English</a>
+            <a href="?lang=fr" class="block px-4 py-2 text-sm hover:bg-gray-100">Français</a>
+            <a href="?lang=ja" class="block px-4 py-2 text-sm hover:bg-gray-100">日本語</a>
+            <a href="?lang=hi" class="block px-4 py-2 text-sm hover:bg-gray-100">हिन्दी</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-toggle" aria-label="Toggle Menu" class="md:hidden w-8 h-8 flex flex-col justify-between items-center">
+      <span id="line1" class="block h-1 w-full bg-gray-800 rounded transition-transform duration-300 origin-center"></span>
+      <span id="line2" class="block h-1 w-full bg-gray-800 rounded transition-opacity duration-300"></span>
+      <span id="line3" class="block h-1 w-full bg-gray-800 rounded transition-transform duration-300 origin-center"></span>
+    </button>
   </div>
 
-  <!-- JS Toggle Script -->
-  <script>
-    const toggleBtn = document.getElementById('mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const line1 = document.getElementById('line1');
-    const line2 = document.getElementById('line2');
-    const line3 = document.getElementById('line3');
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-white/90 backdrop-blur-xl text-gray-800 font-semibold -translate-y-full transition-transform duration-500 ease-in-out md:hidden z-50 flex flex-col items-center justify-center space-y-10 px-6">
 
-    toggleBtn.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.contains('translate-y-0');
+    <a href="{% url 'dashboard' %}" class="hover:text-sky-600 transition text-xl">Dashboard</a>
 
-      if (isOpen) {
-        mobileMenu.classList.replace('translate-y-0', '-translate-y-full');
-        line1.style.transform = 'rotate(0deg) translate(0, 0)';
-        line2.style.opacity = '1';
-        line3.style.transform = 'rotate(0deg) translate(0, 0)';
-      } else {
-        mobileMenu.classList.replace('-translate-y-full', 'translate-y-0');
-        line1.style.transform = 'rotate(45deg) translate(5px, 5px)';
-        line2.style.opacity = '0';
-        line3.style.transform = 'rotate(-45deg) translate(5px, -5px)';
-      }
-    });
-  </script>
+    <!-- Login & Signup Buttons -->
+    <div class="flex gap-4 mt-4">
+      <a href="{% url 'login' %}" class="px-5 py-2 border-2 border-sky-500 text-sky-600 font-semibold rounded-full hover:bg-sky-50 transition text-sm">
+        Log in
+      </a>
+      <a href="{% url 'register' %}" class="px-5 py-2 bg-sky-600 text-white font-semibold rounded-full hover:bg-sky-700 transition text-sm">
+        Sign up
+      </a>
+    </div>
+
+    <!-- Language Dropdown for Mobile -->
+    <div class="flex flex-col items-center space-y-2 text-sm font-medium mt-6">
+      <span class="text-gray-600">Choose Language</span>
+      <select onchange="location = this.value;" class="p-2 border rounded-full shadow-sm focus:ring-2 focus:ring-sky-400">
+        <option value="?lang=en">English</option>
+        <option value="?lang=fr">Français</option>
+        <option value="?lang=ja">日本語</option>
+        <option value="?lang=hi">हिन्दी</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<!-- Toggle Script -->
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const line1 = document.getElementById('line1');
+  const line2 = document.getElementById('line2');
+  const line3 = document.getElementById('line3');
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('translate-y-0');
+    if (isOpen) {
+      mobileMenu.classList.replace('translate-y-0', '-translate-y-full');
+      line1.style.transform = 'rotate(0deg) translate(0, 0)';
+      line2.style.opacity = '1';
+      line3.style.transform = 'rotate(0deg) translate(0, 0)';
+    } else {
+      mobileMenu.classList.replace('-translate-y-full', 'translate-y-0');
+      line1.style.transform = 'rotate(45deg) translate(5px, 5px)';
+      line2.style.opacity = '0';
+      line3.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    }
+  });
+</script>
 
 
-  <!-- Hero Section -->
+<!-- Hero Section -->
 {% load static %}
 <section class="relative isolate py-28 px-6 md:px-20 bg-gradient-to-br from-[#f0f4ff] via-white to-[#ffe6f0] overflow-hidden">
 
