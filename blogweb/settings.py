@@ -62,6 +62,7 @@ LOCALE_PATHS = [
 ]
 
 
+ASGI_APPLICATION = "blogweb.asgi.application"
 
 # Application definition
 
@@ -86,7 +87,6 @@ INSTALLED_APPS = [
 ]
 
 
-ASGI_APPLICATION='blogweb.asgi:application'
 
 
 
