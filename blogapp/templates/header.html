@@ -11,9 +11,9 @@
         theme: {
           extend: {
             colors: {
-              primary: "#2563eb", // Blue-600
-              accent: "#60a5fa", // Blue-400
-              dark: "#1e40af", // Dark Blue
+              primary: "#7c3aed", // Purple-600
+              accent: "#a78bfa", // Light Purple
+              dark: "#4c1d95", // Deep Purple
             },
           },
         },
@@ -23,72 +23,75 @@
 
   <body class="bg-white text-gray-800">
     <!-- HEADER -->
-    <header class="bg-gradient-to-r from-blue-700 to-blue-500 text-white shadow-lg fixed top-0 left-0 right-0 z-50 px-8 py-5 flex justify-between items-center text-base md:text-lg">
+    <header class="bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-800 text-white shadow-md fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-4 flex justify-between items-center">
+
       <!-- Logo -->
-      <a href="/" class="text-3xl font-bold tracking-wide hover:text-accent transition-all">
-        Blog<span class="text-yellow-300">Beat</span>
+      <a href="/" class="text-3xl font-bold tracking-wide hover:text-accent transition">
+        Blog<span class="text-pink-300">Beat</span>
       </a>
 
-      <!-- Mobile Menu Icon -->
-      <div class="md:hidden block text-4xl cursor-pointer" onclick="toggleMenu()">☰</div>
-
-      <!-- Navigation Links -->
-      <nav id="navbar" class="hidden md:flex items-center space-x-8 font-medium text-white">
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium">
         {% if user.is_authenticated %}
-        <!-- <a href="/add-blog" class="hover:text-yellow-200 transition-all">Add Blogs</a>
-        <a href="/" class="hover:text-yellow-200 transition-all">All Blogs</a> -->
-
-        <!-- Profile Dropdown -->
         <div class="relative group">
-          <div class="flex items-center space-x-2 cursor-pointer">
-            <img
-              src="{% static 'img/blogb.jpg' %}"
-              alt="Profile"
-              class="w-10 h-10 rounded-full border-2 border-white"
-            />
-            <span class="hidden md:inline-block font-semibold">{{ user.username }}</span>
-            <svg class="w-4 h-4 mt-1 text-white group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z"/>
+          <div class="flex items-center gap-2 cursor-pointer">
+            <span> {{ user.first_name|default:user.username }}</span>
+            <img src="{% static 'img/blogb.jpg' %}" alt="Profile" class="w-9 h-9 rounded-full border-2 border-white object-cover" />
+            
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z"/>
             </svg>
           </div>
-          <div class="absolute right-0 mt-3 w-56 bg-white text-black rounded-xl shadow-lg p-3 hidden group-hover:flex flex-col z-50">
-            <div class="px-3 py-2">
-              <p class="font-semibold">{{ user.username }}</p>
+          <div class="absolute right-0 mt-3 w-56 bg-white text-gray-800 rounded-xl shadow-lg p-3 hidden group-hover:flex flex-col z-50">
+            <div class="px-3 py-2 border-b">
+              <p class="font-semibold"> {{ user.first_name|default:user.username }} </p>
               <p class="text-xs text-gray-500">{{ user.email }}</p>
             </div>
-            <hr />
-            <a href="/my-blog" class="px-3 py-2 hover:bg-gray-100 rounded">📘 My Blog</a>
-            <a href="/settings" class="px-3 py-2 hover:bg-gray-100 rounded">⚙️ Settings</a>
-            <a href="/saved-blogs" class="px-3 py-2 hover:bg-gray-100 rounded">💾 Saved Blogs</a>
-            <a href="/logout" class="px-3 py-2 text-red-600 hover:bg-gray-100 rounded">🚪 Logout</a>
+            <a href="/my-blog" class="px-3 py-2 hover:bg-gray-100 rounded">My Blog</a>
+            <a href="/settings" class="px-3 py-2 hover:bg-gray-100 rounded">Settings</a>
+            <a href="/saved-blogs" class="px-3 py-2 hover:bg-gray-100 rounded">Saved Blogs</a>
+            <a href="/logout" class="px-3 py-2 text-red-600 hover:bg-gray-100 rounded">Logout</a>
           </div>
         </div>
         {% else %}
-        <a href="/" class="hover:text-yellow-200">Signup</a>
-        <a href="{% url 'login' %}" class="hover:text-yellow-200">Login</a>
+        <a href="/" class="hover:text-pink-200">Signup</a>
+        <a href="{% url 'login' %}" class="hover:text-pink-200">Login</a>
         {% endif %}
       </nav>
+
+      <!-- Mobile Menu Icon -->
+      <div class="md:hidden">
+        <button id="mobile-menu-toggle" class="text-white text-3xl focus:outline-none">☰</button>
+      </div>
     </header>
 
-    <!-- Mobile Nav Toggle Script -->
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="md:hidden fixed top-[72px] right-4 bg-white text-gray-800 shadow-xl w-11/12 max-w-sm rounded-xl z-40 hidden transition-all duration-300">
+      <div class="p-4 space-y-4">
+        {% if user.is_authenticated %}
+        <div class="border-b pb-3">
+          <p class="font-semibold">{{ user.username }}</p>
+          <p class="text-xs text-gray-500">{{ user.email }}</p>
+        </div>
+        <a href="/my-blog" class="block px-3 py-2 hover:bg-gray-100 rounded">My Blog</a>
+        <a href="/settings" class="block px-3 py-2 hover:bg-gray-100 rounded">Settings</a>
+        <a href="/saved-blogs" class="block px-3 py-2 hover:bg-gray-100 rounded">Saved Blogs</a>
+        <a href="/logout" class="block px-3 py-2 text-red-600 hover:bg-red-50 rounded">Logout</a>
+        {% else %}
+        <a href="/" class="block px-3 py-2 hover:bg-gray-100 rounded">Signup</a>
+        <a href="{% url 'login' %}" class="block px-3 py-2 hover:bg-gray-100 rounded">Login</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Toggle Script -->
     <script>
-      function toggleMenu() {
-        const nav = document.getElementById("navbar");
-        nav.classList.toggle("hidden");
-        nav.classList.toggle("flex");
-        nav.classList.toggle("flex-col");
-        nav.classList.toggle("absolute");
-        nav.classList.toggle("bg-gradient-to-r");
-        nav.classList.toggle("from-blue-700");
-        nav.classList.toggle("to-blue-500");
-        nav.classList.toggle("rounded-xl");
-        nav.classList.toggle("top-20");
-        nav.classList.toggle("right-6");
-        nav.classList.toggle("p-6");
-        nav.classList.toggle("space-y-4");
-        nav.classList.toggle("shadow-xl");
-        nav.classList.toggle("z-40");
-      }
+      const toggleBtn = document.getElementById("mobile-menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      toggleBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
     </script>
   </body>
 </html>

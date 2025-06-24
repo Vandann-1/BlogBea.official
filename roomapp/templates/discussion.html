@@ -1,63 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Discussion Room - {{ blog.title }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-tr from-purple-100 via-gray-50 to-white min-h-screen flex items-center justify-center p-4">
 
-{%load static%}
-<div class="border rounded-lg p-4 bg-white shadow-md max-w-2xl mx-auto my-10">
-  <h2 class="text-xl font-semibold mb-4">💬 Join the Discussion</h2>
-  <div id="chat-box" class="h-64 overflow-y-scroll bg-gray-100 p-3 mb-2 rounded"></div>
-  <input id="chat-input" type="text" placeholder="Type a message..." class="w-full border px-4 py-2 rounded mb-2" />
-  <button id="chat-send-btn" class="bg-sky-600 text-white px-4 py-2 rounded">Send</button>
-</div>
+  <div class="transition-all duration-500 w-full max-w-4xl bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-[250px_1fr] overflow-hidden">
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const slug = "{{ blog.slug|escapejs }}";
+    <!-- Sidebar -->
+    <aside class="hidden md:flex flex-col bg-purple-700 text-white p-6 space-y-6 justify-between rounded-l-3xl">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden flex items-center justify-center bg-white/20">
+          <img src="{% static 'img/blogb.jpg' %}" alt="BlogBeat" class="w-full h-full object-cover rounded-full" />
+        </div>
+        <h2 class="text-lg font-bold tracking-wide">BlogBeat</h2>
+      </div>
+      <div class="text-center space-y-2">
+        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
+          {{ blog.user.username|slice:":1"|upper }}
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">{{ blog.user.username }}</h3>
+          <p class="text-sm text-purple-200">Discussion Owner</p>
+        </div>
+        <p class="text-xs text-purple-100">Started on {{ blog.created_at|date:"M d, Y" }}</p>
+      </div>
+      <div class="text-xs text-purple-200 italic text-center">
+        <p>Stay Curious 🚀</p>
+      </div>
+    </aside>
 
-    if (!slug) {
-      console.error("❌ [Chat] blog.slug is not defined — check if it's passed in context.");
-      return;
-    }
+    <!-- Chat Area -->
+    <main class="p-5 flex flex-col space-y-4 w-full">
 
-    console.log("🔷 [Chat] Initializing WebSocket for slug:", slug);
+      <!-- Header -->
+      <div>
+        <h1 class="text-2xl font-extrabold text-purple-700 mb-1">BlogBeat Discussion</h1>
+        <h2 class="text-xl font-semibold text-purple-700">{{ blog.title }}</h2>
+      </div>
 
-    const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/blogchat/" + slug + "/");
+      <!-- Chat Box -->
+      <section id="chat-box" class="h-[400px] overflow-y-auto bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-4 shadow-inner scroll-smooth">
+        {% for message in messages %}
+          {% if message.user == request.user %}
+            <div class="flex justify-end">
+              <div class="bg-purple-600 text-white max-w-[70%] p-2 px-4 rounded-xl rounded-br-none text-sm shadow-md">
+                <p>{{ message.content }}</p>
+                <p class="text-[10px] text-purple-200 text-right mt-1">{{ message.timestamp|date:"M d, H:i" }}</p>
+              </div>
+            </div>
+          {% else %}
+            <div class="flex items-start space-x-3">
+              <div class="w-8 h-8 bg-purple-300 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                {{ message.user.username|slice:":1"|upper }}
+              </div>
+              <div class="bg-white border max-w-[70%] p-2 px-4 rounded-xl rounded-bl-none shadow-sm text-sm">
+                <div class="font-medium text-purple-700">{{ message.user.username }}</div>
+                <div>{{ message.content }}</div>
+                <div class="text-[10px] text-gray-400 mt-1">{{ message.timestamp|date:"M d, H:i" }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% empty %}
+          <p class="text-center text-gray-400 italic">No messages yet. Be the first to start the conversation!</p>
+        {% endfor %}
+      </section>
 
-    chatSocket.onopen = () => {
-      console.log("✅ [Chat] WebSocket connection established");
-    };
+      <!-- Input Section -->
+      {% if user.is_authenticated %}
+        <!-- Typing Preview -->
+        <div id="typing-preview" class="text-sm text-gray-600 italic mb-2 hidden">
+          <span class="font-semibold text-purple-700">{{ user.username }}</span>: 
+          <span id="typing-message"></span>
+        </div>
 
-    chatSocket.onclose = (e) => {
-      console.warn("⚠️ [Chat] WebSocket connection closed unexpectedly", e);
-    };
+        <!-- Input Row -->
+        <div class="flex items-center gap-3">
+          <!-- File Upload Button -->
+          <label for="file-upload" class="cursor-pointer p-3 bg-gray-100 hover:bg-gray-200 rounded-xl shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <input type="file" id="file-upload" class="hidden" />
+          </label>
 
-    chatSocket.onerror = (err) => {
-      console.error("❌ [Chat] WebSocket error:", err);
-    };
+          <!-- Chat Input -->
+          <input id="chat-input" type="text" placeholder="Type a message..." 
+                 class="flex-1 px-4 py-3 border border-gray-300 rounded-xl shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white" />
 
-    chatSocket.onmessage = function (e) {
-      const data = JSON.parse(e.data);
-      console.log("📥 [Chat] Message received:", data);
+          <!-- Send Button -->
+          <button id="chat-send-btn"
+                  class="bg-purple-700 hover:bg-purple-800 text-white px-5 py-2 rounded-xl font-semibold shadow-md">
+            Send
+          </button>
+        </div>
+      {% else %}
+        <p class="text-sm text-red-500 text-center">
+          Please <a href="{% url 'login' %}" class="underline font-semibold">log in</a> to chat.
+        </p>
+      {% endif %}
+    </main>
+  </div>
 
-      const chatBox = document.querySelector("#chat-box");
-      chatBox.innerHTML += `<p><strong>${data.user}</strong>: ${data.message}</p>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
-    };
+  <!-- WebSocket Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const slug = "{{ blog.slug|escapejs }}";
+      const currentUser = "{{ user.username|escapejs }}";
 
-    document.querySelector("#chat-send-btn").addEventListener("click", function () {
-      const input = document.querySelector("#chat-input");
-      const message = input.value.trim();
-      if (message.length === 0) {
-        console.log("⚠️ [Chat] Empty message — not sending.");
+      if (!slug) {
+        console.error("❌ [Chat] blog.slug is not defined.");
         return;
       }
 
-      if (chatSocket.readyState === WebSocket.OPEN) {
-        const payload = JSON.stringify({ message: message });
-        chatSocket.send(payload);
-        console.log("📤 [Chat] Sent message:", payload);
-        input.value = "";
-      } else {
-        console.error("❌ [Chat] WebSocket is not open. Current state:", chatSocket.readyState);
-        alert("WebSocket not connected yet.");
-      }
+      const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/blogchat/" + slug + "/");
+
+      chatSocket.onopen = () => console.log("✅ [Chat] WebSocket connection established");
+
+      chatSocket.onclose = (e) => console.warn("⚠️ [Chat] WebSocket closed:", e);
+
+      chatSocket.onerror = (err) => console.error("❌ [Chat] WebSocket error:", err);
+
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const isCurrentUser = data.user === currentUser;
+        const chatBox = document.querySelector("#chat-box");
+
+        const msgHTML = isCurrentUser
+          ? `<div class="flex justify-end">
+                <div class="bg-purple-600 text-white max-w-[70%] p-2 px-4 rounded-xl rounded-br-none text-sm shadow-md">
+                  <p>${data.message}</p>
+                  <p class="text-[10px] text-purple-200 text-right mt-1">just now</p>
+                </div>
+              </div>`
+          : `<div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-purple-300 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                  ${data.user.charAt(0).toUpperCase()}
+                </div>
+                <div class="bg-white border max-w-[70%] p-2 px-4 rounded-xl rounded-bl-none shadow-sm text-sm">
+                  <div class="font-medium text-purple-700">${data.user}</div>
+                  <div>${data.message}</div>
+                  <div class="text-[10px] text-gray-400 mt-1">just now</div>
+                </div>
+              </div>`;
+
+        chatBox.innerHTML += msgHTML;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      };
+
+      const input = document.querySelector("#chat-input");
+      const previewBox = document.querySelector("#typing-preview");
+      const previewMsg = document.querySelector("#typing-message");
+
+      // Show typing preview
+      input.addEventListener("input", () => {
+        const text = input.value.trim();
+        if (text.length > 0) {
+          previewMsg.textContent = text;
+          previewBox.classList.remove("hidden");
+        } else {
+          previewBox.classList.add("hidden");
+          previewMsg.textContent = "";
+        }
+      });
+
+      // Send message
+      document.querySelector("#chat-send-btn").addEventListener("click", function () {
+        const message = input.value.trim();
+        if (!message) return;
+
+        if (chatSocket.readyState === WebSocket.OPEN) {
+          chatSocket.send(JSON.stringify({ message }));
+          input.value = "";
+          previewMsg.textContent = "";
+          previewBox.classList.add("hidden");
+        } else {
+          alert("WebSocket is not connected.");
+        }
+      });
+
+      // Scroll on load
+      const chatBoxInit = document.getElementById("chat-box");
+      if (chatBoxInit) chatBoxInit.scrollTop = chatBoxInit.scrollHeight;
     });
-  });
-</script>
+  </script>
+
+</body>
+</html>

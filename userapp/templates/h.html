@@ -122,19 +122,21 @@
 
 <!-- Hero Section -->
 {% load static %}
-<section class="relative isolate py-28 px-6 md:px-20 bg-gradient-to-br from-[#f0f4ff] via-white to-[#ffe6f0] overflow-hidden">
+<section class="relative isolate py-28 px-6 md:px-20 overflow-hidden bg-white">
 
-  <!-- Decorative Background Blurs -->
-  <div class="absolute -top-40 -left-32 w-[400px] h-[400px] bg-purple-300 opacity-20 rounded-full blur-[120px] z-0"></div>
-  <div class="absolute -bottom-48 -right-40 w-[500px] h-[500px] bg-pink-400 opacity-30 rounded-full blur-[140px] z-0"></div>
+  <!-- 🌫️ Glass Background Blur Layer -->
+  <div class="absolute inset-0 z-0 bg-white/40 backdrop-blur-[40px] border border-white/10 shadow-[inset_0_0_60px_rgba(255,255,255,0.2)]"></div>
 
+  <!-- 🌈 Decorative Background Blurs -->
+  <div class="absolute -top-40 -left-32 w-[500px] h-[500px] bg-purple-300 opacity-25 rounded-full blur-[180px] z-0"></div>
+  <div class="absolute -bottom-52 -right-44 w-[600px] h-[600px] bg-pink-400 opacity-25 rounded-full blur-[200px] z-0"></div>
+
+  <!-- 💬 Content -->
   <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-20 relative z-10">
 
-    <!-- Text Section -->
+    <!-- Left Text -->
     <div class="lg:w-1/2 text-center lg:text-left space-y-6">
-
-      <!-- Tagline Badge -->
-      <span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-4 py-1 rounded-full shadow-sm mb-2 animate-pulse">
+      <span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-4 py-1 rounded-full shadow-sm animate-pulse">
         🚀 Empowering Creators
       </span>
 
@@ -150,45 +152,31 @@
       </p>
     </div>
 
-    <!-- Featured Card (Glassmorphism UI) -->
-    <div class="lg:w-1/2">
-      <div class="relative bg-white/10 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-3xl p-6 max-w-md mx-auto hover:scale-[1.02] transition-transform duration-300">
+    <!-- Right Glass Card -->
+    <div class="lg:w-1/2 relative">
+      <div class="relative bg-white/20 backdrop-blur-3xl border border-white/30 shadow-[0_12px_60px_0_rgba(31,38,135,0.3)] rounded-3xl p-6 max-w-md mx-auto hover:scale-[1.04] transition-transform duration-300 overflow-hidden group">
 
-        <img src="{% static 'img/blogb.jpg' %}" alt="BlogBeat Showcase" class="rounded-2xl w-full h-72 object-cover shadow-lg mb-6 border border-white/20" />
+        <!-- Floating Gradient Blur Inside -->
+        <div class="absolute inset-0 z-0 bg-gradient-to-br from-purple-400/25 via-pink-300/25 to-blue-400/25 animate-float blur-2xl opacity-30"></div>
 
-        <div class="text-center space-y-2">
+        <img src="{% static 'img/blogb.jpg' %}" alt="BlogBeat Showcase" class="rounded-2xl w-full h-72 object-cover shadow-xl mb-6 border border-white/20 z-10 relative" />
+
+        <div class="text-center space-y-2 relative z-10">
           <h3 class="text-3xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-red-400 bg-clip-text text-transparent drop-shadow-md">
-      
+            Featured Blog
           </h3>
           <p class="text-sm text-black/80">
             Unleash your thoughts. Express, engage, and elevate your ideas with clarity.
           </p>
         </div>
-
-        <!-- Glass Glow Decorations -->
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-pink-500 to-indigo-500 rounded-full blur-3xl opacity-30 z-0"></div>
-        <div class="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full blur-2xl opacity-40 z-0"></div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- Gradient Animation Style -->
-<style>
-@keyframes gradient-move {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-move 5s ease infinite;
-}
-</style>
+
+
 
 
 
@@ -226,6 +214,8 @@
 
   </div>
 </section>
+
+
 
 
 
@@ -272,6 +262,7 @@
 
   </div>
 </section>
+
 
 
   
@@ -643,7 +634,7 @@
         <ul class="space-y-1">
           <li><a href="#" class="hover:underline">GitHub</a></li>
           <li><a href="#" class="hover:underline">LinkedIn</a></li>
-          <li><a href="#" class="hover:underline">Instagram</a></li>
+          <li><a href="https://www.instagram.com/blogbeat.official?igsh=MXZ3azZzY2d1dHZwdg==" class="hover:underline">Instagram</a></li>
         </ul>
         <div class="mt-2">
           <span class="bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full">Status: 100% uptime</span>

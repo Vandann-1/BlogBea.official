@@ -63,8 +63,10 @@ class Blog(models.Model):
     def total_likes(self):
         return self.likes.count()
     
-    def __str__(self):
-        return f'{self.title} - {self.user.username} -'
+def __str__(self):
+    name = self.user.get_full_name()
+    return f'{self.title} - {name or self.user.username}'
+
 
     class Meta:
         db_table = "Blogs"  # to change table name in sql table
@@ -99,7 +101,7 @@ class Profile(models.Model):
 
 #  for comment
 class Comment(models.Model):
-    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='comments')
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -108,7 +110,7 @@ class Comment(models.Model):
         return f"{self.user.username}: {self.content[:20]}"
 
 class Savedblog(models.Model):
-    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='saveblogs')
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     
