@@ -1,0 +1,24 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore DB and env files
+*.sqlite3
+db.sqlite3
+.env
+
+# Ignore VS Code folder
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Node / frontend
+node_modules/
+*.lock
+
+# Logs
+*.log
