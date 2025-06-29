@@ -27,6 +27,14 @@ class SavedblogAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'blog', 'content', 'timestamp']
+    list_display = ['get_username', 'get_blog_title', 'content', 'timestamp']
     search_fields = ['user__username', 'blog__title', 'content']
     list_filter = ['timestamp']
+
+    def get_username(self, obj):
+        return obj.user.username
+    get_username.short_description = 'User'
+
+    def get_blog_title(self, obj):
+        return obj.blog.title
+    get_blog_title.short_description = 'Blog'

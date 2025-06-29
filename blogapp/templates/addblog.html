@@ -5,105 +5,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Blog | BlogBeat</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
     body {
       font-family: 'DM Sans', sans-serif;
     }
+    .glass {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .animate-fade {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
-<body class="bg-gradient-to-br from-purple-50 via-white to-purple-100 min-h-screen py-10 px-4">
 
-  <!-- Info Section -->
-  <section class="max-w-4xl mx-auto bg-gradient-to-tr from-indigo-700 to-purple-600 text-white rounded-3xl shadow-xl p-8 mb-10 text-center">
-    <h2 class="text-4xl font-bold mb-4">Welcome to BlogBeat ✨</h2>
-    <p class="text-lg">Where words turn into wonders.</p>
-    <p class="text-sm mt-2">Craft your unique story, powered by AI. Share knowledge, insights, and creativity.</p>
+<body class="bg-gradient-to-br from-purple-100 via-white to-indigo-200 min-h-screen px-4 py-12">
+
+  <!-- Header -->
+  <section class="max-w-4xl mx-auto glass rounded-3xl shadow-xl p-10 mb-12 text-center text-gray-800 animate-fade">
+    <h1 class="text-5xl font-extrabold text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text animate-pulse">
+      <i class="fas fa-pen-nib mr-2"></i> BlogBeat Studio
+    </h1>
+    <p class="text-lg mt-3 font-medium text-gray-700">Craft your masterpiece. Let AI guide your imagination ✨</p>
   </section>
 
-  <!-- Form Section -->
-  <section class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-10 space-y-8">
-    <h2 class="text-3xl font-semibold text-gray-800 text-center">📝 Create a New Blog</h2>
+  <!-- Main Form Section -->
+  <section class="max-w-6xl mx-auto bg-white/80 backdrop-blur-lg border border-gray-200 shadow-2xl rounded-3xl px-8 py-12 grid lg:grid-cols-2 gap-10 animate-fade">
 
-    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+    <!-- Image Upload -->
+<div>
+  <label for="blog_image" class="block text-sm font-bold text-gray-700 mb-1">
+    <i class="fas fa-image mr-1 text-yellow-500"></i> Blog Thumbnail
+  </label>
+  <input type="file" id="blog_image" name="blog_image" accept="image/*"
+    class="w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300" required />
+</div>
+
+    <!-- Blog Form -->
+    <form method="POST" enctype="multipart/form-data" class="space-y-10" onsubmit="return validateForm()">
       {% csrf_token %}
 
-      <!-- Title with AI -->
+      <!-- Blog Title -->
       <div>
-        <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Blog Title</label>
-        <div class="flex items-center gap-2">
+        <label for="title" class="block text-sm font-bold text-gray-700 mb-1">
+          <i class="fas fa-heading mr-1 text-indigo-500"></i> Blog Title
+        </label>
+        <div class="relative">
           <input type="text" id="title" name="title" maxlength="50" required
-            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm" />
+            class="peer w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300" />
           <button type="button" onclick="generateTitle(this)"
-            class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-md text-sm transition duration-200 whitespace-nowrap">
-            🤖 Generate Title
+            class="absolute right-2 top-2.5 bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-full shadow text-sm">
+            <i class="fas fa-magic"></i>
           </button>
         </div>
       </div>
 
-      <!-- Description with AI -->
+      <!-- Blog Description -->
       <div>
-        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Blog Description</label>
-        <div class="flex flex-col gap-2">
+        <label for="description" class="block text-sm font-bold text-gray-700 mb-1">
+          <i class="fas fa-align-left mr-1 text-pink-500"></i> Blog Description
+        </label>
+        <div class="relative">
           <textarea id="description" name="description" maxlength="200" required rows="5"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm resize-none"></textarea>
+            class="peer w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300"></textarea>
           <button type="button" onclick="generateDescription(this)"
-            class="self-start bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-md text-sm transition duration-200">
-            ✍️ Generate Description
+            class="absolute top-2 right-2 bg-pink-500 hover:bg-pink-600 text-white px-3 py-1.5 rounded-full shadow-md text-sm">
+            <i class="fas fa-robot"></i>
           </button>
         </div>
-      </div>
-
-      <!-- Image Upload -->
-      <div>
-        <label for="blog_image" class="block text-sm font-medium text-gray-700 mb-2">Upload Blog Image</label>
-        <input type="file" id="blog_image" name="blog_image" accept="image/*"
-          class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200" />
       </div>
 
       <!-- Submit Button -->
       <div>
         <button type="submit"
-          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
-          🚀 Publish Blog
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-indigo-400">
+          <i class="fas fa-paper-plane mr-2"></i>Publish Blog
         </button>
       </div>
     </form>
   </section>
 
-  <!-- JavaScript for AI Title & Description -->
+  <!-- JS -->
   <script>
     async function generateTitle(button) {
-      button.innerText = "⏳ Generating...";
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
       button.disabled = true;
-
       try {
         const res = await fetch('/generate-title/');
         const data = await res.json();
         document.getElementById('title').value = data.title || 'Could not generate title.';
-      } catch (err) {
-        alert("Failed to fetch title.");
+      } catch {
+        alert("Failed to generate title.");
       }
-
-      button.innerText = "🤖 Generate Title";
+      button.innerHTML = '<i class="fas fa-magic"></i>';
       button.disabled = false;
     }
 
     async function generateDescription(button) {
-      button.innerText = "⏳ Generating...";
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
       button.disabled = true;
-
       try {
         const res = await fetch('/generate-description/');
         const data = await res.json();
         document.getElementById('description').value = data.description || 'Could not generate description.';
-      } catch (err) {
-        alert("Failed to fetch description.");
+      } catch {
+        alert("Failed to generate description.");
       }
-
-      button.innerText = "✍️ Generate Description";
+      button.innerHTML = '<i class="fas fa-robot"></i>';
       button.disabled = false;
+    }
+
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        document.getElementById('preview').src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function validateForm() {
+      const title = document.getElementById('title').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const image = document.getElementById('blog_image').files[0];
+
+      if (!title && !description && !image) {
+        alert("🚫 Please fill in the title, description, and upload an image.");
+        return false;
+      }
+      if (!title) {
+        alert("🚫 Please enter a blog title.");
+        return false;
+      }
+      if (!description) {
+        alert("🚫 Please enter a blog description.");
+        return false;
+      }
+      if (!image) {
+        alert("🚫 Please upload a blog image.");
+        return false;
+      }
+      return true;
     }
   </script>
 

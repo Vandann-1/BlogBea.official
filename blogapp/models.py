@@ -33,7 +33,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()                     # Changed to TextField for longer descriptions
      # Changed to DateTimeField for more precision
-    blog_image = models.ImageField(upload_to="blogimages/")
+    blog_image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # it means delete all user blog
     custom_date = models.DateTimeField(null=True, blank=True)
     custom_choices = models.DateTimeField(null=True, blank=True)
@@ -101,8 +101,8 @@ class Profile(models.Model):
 
 #  for comment
 class Comment(models.Model):
-    blog = models.ForeignKey('Blog', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='comments') 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 

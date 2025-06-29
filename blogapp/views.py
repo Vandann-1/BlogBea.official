@@ -12,23 +12,24 @@ from django.urls import reverse
 # Create your views here.
 
 
-@login_required    #its means we need to login to access this view
+@login_required
 def addblog(request):
     if request.method == 'POST':
-       title=request.POST.get("title")  
-       description=request.POST.get("description")  
-       blog_image=request.FILES["blog_image"]     # for image upload  we want to use .FILES not requeried POST
-       
-       blog=Blog()      # its a object
-       blog.title=title
-       blog.description=description
-       blog.blog_image=blog_image
-       blog.user=request.user
-       blog.save()      #save method to save the data in database which is in models.py and made up by me
-       return redirect('home')
-       
+        title = request.POST.get("title")  
+        description = request.POST.get("description")  
+        image = request.FILES.get('blog_image')  # ✅ Correct: get the uploaded file
+
+        blog = Blog()  # Create a new blog instance
+        blog.title = title
+        blog.description = description
+        blog.blog_image = image  # ✅ Use the correct variable: image
+        blog.user = request.user
+        blog.save()
+        return redirect('home')
+
     else:
-        return render(request,"addblog.html")    
+        return render(request, "addblog.html")
+
         
         
 
@@ -149,8 +150,7 @@ def add_comment(request, blog_id):
         content = request.POST.get('content')
         blog = Blog.objects.get(id=blog_id)
         Comment.objects.create(blog=blog, content=content, user=request.user)
-        return JsonResponse({'success': True})
-
+        return redirect(request.META.get('HTTP_REFERER', '/'))
 
 def blog_detail(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
@@ -193,56 +193,128 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
-@csrf_exempt
-def ai_chat(request):
-    if request.method == "POST":
-        try:
-            body = json.loads(request.body)
-            user_msg = body.get("message", "")
-
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[{"role": "user", "content": user_msg}]
-            )
-
-            reply = response.choices[0].message.content.strip()
-            return JsonResponse({"reply": reply})
-        except Exception as e:
-            return JsonResponse({"reply": "Oops! Something went wrong."})
-    return JsonResponse({"reply": "Invalid request."})
-
 
 
 # blog/views.py
 from django.http import JsonResponse
-import openai
+import random
 
-# Optional: Secure this later using env
-
-
+# Simple demo title generator (you can integrate GPT or your own logic here)
 def generate_title(request):
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a blog writing assistant."},
-                {"role": "user", "content": "Suggest a unique blog title on tech."},
-            ],
-            max_tokens=20,
-        )
-        title = response.choices[0].message.content.strip()
-        return JsonResponse({'title': title})
-    except Exception as e:
-        print("OpenAI error:", str(e))  # See error in terminal
-        return JsonResponse({'error': 'OpenAI Error'}, status=500)
+    titles = [
+       "The Future of AI in 2025",
+    "Mastering Productivity in Daily Life",
+    "Exploring Mental Health in Your Career",
+    "The Art of Digital Marketing in a Digital Era",
+    "Secrets of Startups in 2025",
+    "Beginner's Guide to Technology in the Modern World",
+    "How to Excel in Web Development in Your Career",
+    "The Future of Freelancing in a Digital Era",
+    "Exploring Personal Growth in Daily Life",
+    "Mastering Entrepreneurship in 2025",
+    "The Art of Creativity in the Modern World",
+    "Secrets of Design Thinking in Your Career",
+    "Beginner's Guide to Remote Work in 2025",
+    "How to Excel in Blockchain in the Modern World",
+    "The Future of Cybersecurity in a Digital Era",
+    "Mastering Life Hacks in Your Career",
+    "Exploring Finance in the Modern World",
+    "The Art of Data Science in 2025",
+    "Secrets of Education in a Digital Era",
+    "Beginner's Guide to Social Media in Your Career",
+    "Mastering AI in the Modern World",
+    "Exploring Productivity in 2025",
+    "The Future of Mental Health in Daily Life",
+    "The Art of Startups in a Digital Era",
+    "Secrets of Freelancing in Your Career",
+    "Beginner's Guide to Digital Marketing in the Modern World",
+    "How to Excel in Technology in a Digital Era",
+    "The Future of Web Development in Your Career",
+    "Mastering Personal Growth in 2025",
+    "Exploring Entrepreneurship in the Modern World",
+    "The Art of Remote Work in Daily Life",
+    "Secrets of Blockchain in a Digital Era",
+    "Beginner's Guide to Cybersecurity in the Modern World",
+    "How to Excel in Life Hacks in Your Career",
+    "The Future of Finance in 2025",
+    "Mastering Data Science in a Digital Era",
+    "Exploring Education in Daily Life",
+    "The Art of Social Media in the Modern World",
+    "Secrets of AI in Your Career",
+    "Beginner's Guide to Productivity in 2025",
+    "How to Excel in Mental Health in a Digital Era",
+    "The Future of Startups in the Modern World",
+    "Mastering Freelancing in Daily Life",
+    "Exploring Digital Marketing in Your Career",
+    "The Art of Technology in 2025",
+    "Secrets of Web Development in a Digital Era",
+    "Beginner's Guide to Personal Growth in Your Career",
+    "How to Excel in Entrepreneurship in the Modern World",
+    "The Future of Remote Work in Daily Life",
+    "Mastering Blockchain in Your Career",
+    "Exploring Cybersecurity in the Modern World"
+    ]
+    return JsonResponse({"title": random.choice(titles)})
 
+# Simple demo description generator
 def generate_description(request):
-    if request.method == 'GET':
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": "Write a short, engaging blog description."}],
-            max_tokens=60,
-        )
-        description = response.choices[0].message['content'].strip()
-        return JsonResponse({"description": description})
-    return JsonResponse({"error": "Invalid request"}, status=400)
+    descriptions = [
+        "Dive deep into the evolving world of artificial intelligence and discover how it shapes our lives.",
+        "This blog explores the hidden potential of forming simple habits for long-term success.",
+        "Minimalism isn't just aesthetics — it's a mindset for intentional living.",
+        "Explore the complexity and beauty of human psychology and emotional intelligence.",
+        "A practical, step-by-step guide to help you take control of your time and energy.",
+           "This blog post uncovers practical insights to improve your understanding of AI and how it shapes future innovation.",
+    "This blog post uncovers expert advice to improve your understanding of productivity and how it shapes your success.",
+    "This blog post uncovers modern trends to improve your understanding of mental health and how it shapes digital transformation.",
+    "This blog post uncovers hidden strategies to improve your understanding of digital marketing and how it shapes the industry.",
+    "This blog post uncovers creative approaches to improve your understanding of startups and how it shapes your success.",
+    "This blog post uncovers expert advice to improve your understanding of technology and how it shapes future innovation.",
+    "This blog post uncovers practical insights to improve your understanding of web development and how it shapes your success.",
+    "This blog post uncovers modern trends to improve your understanding of freelancing and how it shapes digital transformation.",
+    "This blog post uncovers creative approaches to improve your understanding of personal growth and how it shapes the industry.",
+    "This blog post uncovers hidden strategies to improve your understanding of entrepreneurship and how it shapes your success.",
+    "This blog post uncovers expert advice to improve your understanding of creativity and how it shapes your success.",
+    "This blog post uncovers practical insights to improve your understanding of design thinking and how it shapes the industry.",
+    "This blog post uncovers creative approaches to improve your understanding of remote work and how it shapes daily habits.",
+    "This blog post uncovers hidden strategies to improve your understanding of blockchain and how it shapes future innovation.",
+    "This blog post uncovers expert advice to improve your understanding of cybersecurity and how it shapes the industry.",
+    "This blog post uncovers practical insights to improve your understanding of life hacks and how it shapes your success.",
+    "This blog post uncovers modern trends to improve your understanding of finance and how it shapes digital transformation.",
+    "This blog post uncovers hidden strategies to improve your understanding of data science and how it shapes your success.",
+    "This blog post uncovers expert advice to improve your understanding of education and how it shapes the industry.",
+    "This blog post uncovers creative approaches to improve your understanding of social media and how it shapes digital transformation.",
+    "This blog post uncovers expert advice to improve your understanding of AI and how it shapes the industry.",
+    "This blog post uncovers modern trends to improve your understanding of productivity and how it shapes future innovation.",
+    "This blog post uncovers practical insights to improve your understanding of mental health and how it shapes your success.",
+    "This blog post uncovers creative approaches to improve your understanding of startups and how it shapes daily habits.",
+    "This blog post uncovers hidden strategies to improve your understanding of freelancing and how it shapes digital transformation.",
+    "This blog post uncovers expert advice to improve your understanding of digital marketing and how it shapes your success.",
+    "This blog post uncovers practical insights to improve your understanding of technology and how it shapes future innovation.",
+    "This blog post uncovers modern trends to improve your understanding of web development and how it shapes the industry.",
+    "This blog post uncovers creative approaches to improve your understanding of personal growth and how it shapes your success.",
+    "This blog post uncovers expert advice to improve your understanding of entrepreneurship and how it shapes future innovation.",
+    "This blog post uncovers hidden strategies to improve your understanding of remote work and how it shapes daily habits.",
+    "This blog post uncovers modern trends to improve your understanding of blockchain and how it shapes the industry.",
+    "This blog post uncovers creative approaches to improve your understanding of cybersecurity and how it shapes your success.",
+    "This blog post uncovers expert advice to improve your understanding of life hacks and how it shapes digital transformation.",
+    "This blog post uncovers practical insights to improve your understanding of finance and how it shapes your success.",
+    "This blog post uncovers hidden strategies to improve your understanding of data science and how it shapes the industry.",
+    "This blog post uncovers expert advice to improve your understanding of education and how it shapes future innovation.",
+    "This blog post uncovers creative approaches to improve your understanding of social media and how it shapes the industry.",
+    "This blog post uncovers practical insights to improve your understanding of AI and how it shapes digital transformation.",
+    "This blog post uncovers expert advice to improve your understanding of productivity and how it shapes your success.",
+    "This blog post uncovers hidden strategies to improve your understanding of mental health and how it shapes the industry.",
+    "This blog post uncovers modern trends to improve your understanding of startups and how it shapes your success.",
+    "This blog post uncovers creative approaches to improve your understanding of freelancing and how it shapes future innovation.",
+    "This blog post uncovers expert advice to improve your understanding of digital marketing and how it shapes the industry.",
+    "This blog post uncovers practical insights to improve your understanding of technology and how it shapes your success.",
+    "This blog post uncovers modern trends to improve your understanding of web development and how it shapes future innovation.",
+    "This blog post uncovers creative approaches to improve your understanding of personal growth and how it shapes digital transformation.",
+    "This blog post uncovers expert advice to improve your understanding of entrepreneurship and how it shapes your success.",
+    "This blog post uncovers practical insights to improve your understanding of remote work and how it shapes the industry.",
+    "This blog post uncovers hidden strategies to improve your understanding of blockchain and how it shapes your success.",
+    "This blog post uncovers expert advice to improve your understanding of cybersecurity and how it shapes future innovation."
+]
+    
+    return JsonResponse({"description": random.choice(descriptions)})

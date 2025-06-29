@@ -1,14 +1,12 @@
 from django.urls import path
 from blogapp.views import *
-from .views import ai_chat
+
 
 
 
 urlpatterns = [
     
 path('add-blog',addblog, name='addblog'),
-path("api/chat/", ai_chat, name="ai_chat"),
-
 path('blogs/<int:bg_id>/',viewBg, name="seeblog"),
 path('my-blog',myblog,name="myblog"),
 path('edit_blog/<int:bg_id>/',edit_blog,name="edit_blog"),

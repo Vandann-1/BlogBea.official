@@ -42,16 +42,32 @@
               <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z"/>
             </svg>
           </div>
-          <div class="absolute right-0 mt-3 w-56 bg-white text-gray-800 rounded-xl shadow-lg p-3 hidden group-hover:flex flex-col z-50">
-            <div class="px-3 py-2 border-b">
-              <p class="font-semibold"> {{ user.first_name|default:user.username }} </p>
-              <p class="text-xs text-gray-500">{{ user.email }}</p>
-            </div>
-            <a href="/my-blog" class="px-3 py-2 hover:bg-gray-100 rounded">My Blog</a>
-            <a href="/settings" class="px-3 py-2 hover:bg-gray-100 rounded">Settings</a>
-            <a href="/saved-blogs" class="px-3 py-2 hover:bg-gray-100 rounded">Saved Blogs</a>
-            <a href="/logout" class="px-3 py-2 text-red-600 hover:bg-gray-100 rounded">Logout</a>
-          </div>
+<div class="absolute right-0 mt-3 w-60 bg-white text-gray-800 rounded-2xl shadow-xl p-4 hidden group-hover:flex flex-col z-50 transition-all duration-300 ease-in-out">
+
+  <!-- User Info -->
+  <div class="flex items-start gap-3 pb-4 border-b border-gray-200">
+    <div class="flex-1">
+      <p class="font-semibold text-sm">{{ user.first_name|default:user.username }}</p>
+      <p class="text-xs text-gray-500 break-all">{{ user.email }}</p>
+    </div>
+  </div>
+
+  <!-- Menu Links with FA Icons -->
+  <a href="/my-blog" class="mt-4 flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-gray-100 transition">
+    <i class="fas fa-blog w-4"></i> My Blog
+  </a>
+  <a href="/settings" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-gray-100 transition">
+    <i class="fas fa-cog w-4"></i> Settings
+  </a>
+  <a href="/saved-blogs" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-gray-100 transition">
+    <i class="fas fa-bookmark w-4"></i> Saved Blogs
+  </a>
+  <a href="/logout" class="flex items-center gap-3 px-3 py-2 text-sm text-red-600 rounded-lg hover:bg-red-50 transition">
+    <i class="fas fa-sign-out-alt w-4"></i> Logout
+  </a>
+
+</div>
+
         </div>
         {% else %}
         <a href="/" class="hover:text-pink-200">Signup</a>
