@@ -33,7 +33,7 @@ SECRET_KEY = "django-insecure-abc123$randomkey!@#generated"
 
 
 
-ALLOWED_HOSTS: []
+ALLOWED_HOSTS: ["*"]
 
 
 # spotify
