@@ -80,24 +80,15 @@ def hh(request):
 def Livechat(request):
     return render(request, "vc.html")
 
-@login_required
-def send_friend_request(request, user_id):
-    to_user = get_object_or_404(User, id=user_id)
-    FriendRequest.objects.get_or_create(from_user=request.user, to_user=to_user)
-    return redirect('profile', user_id=user_id)
-
-@login_required
-def accept_friend_request(request, request_id):
-    f_request = get_object_or_404(FriendRequest, id=request_id, to_user=request.user)
-    f_request.accepted = True
-    f_request.save()
-    return redirect('profile', user_id=f_request.from_user.id)
 
 def podcs(request):
     return render(request,"podcats.html")
 
 def dashboard(request):
         return render(request, "das.html")
+    
+def ss(request):
+    pass    
 
 
 
