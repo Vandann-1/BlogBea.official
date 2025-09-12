@@ -76,7 +76,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'userapp',
     'blogapp',
-    'django_cron',
     'corsheaders',    
     'roomapp' , 
     'podcasts',
