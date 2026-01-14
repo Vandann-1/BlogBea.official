@@ -33,7 +33,11 @@ SECRET_KEY = "django-insecure-abc123$randomkey!@#generated"
 
 
 
-ALLOWED_HOSTS: ["*"]
+ALLOWED_HOSTS = [
+    "blogbea-official-3.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 
 
 # spotify
